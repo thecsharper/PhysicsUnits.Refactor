@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Keith Barrett 2021 -->
+<units name="Metric">
+
+  <unit name="Ones"                   shortname="1"       dimension="Dimensionless" display="Explicit" />
+  <unit name="Metres"                 shortname="m"       dimension="Length" display="Standard" />
+  <unit name="SquareMetres"           shortname="m²"      dimension="Area"   display="Standard" />
+  <unit name="CubicMetres"            shortname="m³"      dimension="Volume" display="Standard" />
+  <unit name="Kilograms"              shortname="kg"      dimension="Mass"   display="Standard" />
+  <unit name="Seconds"                shortname="s"       dimension="Time"   display="Standard" />
+  <unit name="Ampere"                 shortname="amp"     dimension="Current"   display="Standard" />
+  <unit name="DegreesKelvin"          shortname="K"       dimension="TemperatureChange"   display="Standard" />
+  <unit name="Mole"                   shortname="mol"     dimension="AmountOfSubstance"   display="Standard" />
+  <unit name="Candela"                shortname="cd"      dimension="LuminousIntensity"   display="Standard" />
+  <unit name="Radians"                shortname="rad"     dimension="Angle"  display="Standard" />
+
+  <unit name="MetresPerSecond"        shortname="m/s"     dimension="Velocity"      display="Standard"  />
+  <unit name="MetresPerSecondSquared" shortname="m/s²"    dimension="Acceleration"  display="Standard"  />
+  <unit name="KilogramMetresPerSecond" shortname="kg⋅m/s" dimension="Momentum"      display="Standard"  />
+  <unit name="KilogramsPerCubicMetre"  shortname="kg/m³"  dimension="Density"       display="Standard"  />
+  <unit name="Newtons"                shortname="N"       dimension="Force"         display="Standard"  />
+  <unit name="Joules"                 shortname="J"       dimension="Energy"        display="Standard"  />
+  <unit name="Watts"                  shortname="W"       dimension="Power"         display="Standard"  />
+  <unit name="Pascals"                shortname="Pa"      dimension="Pressure"      display="Standard"  />
+  <unit name="Hertz"                  shortname="Hz"      dimension="Frequency"     display="Standard" />
+  <unit name="KilogramsPerSecond"     shortname="kg/s"    dimension="MassFlowRate"  display="Standard" />
+  <unit name="CubicMetresPerSecond"   shortname="m³/s"    dimension="VolumeFlowRate"  display="Standard" />
+  <unit name="Volts"                  shortname="volt"    dimension="ElectricPotential"  display="Standard" />
+  <unit name="Ohms"                   shortname="Ω"       dimension="Resistance"  display="Standard" />
+  <unit name="JoulesPerDegreeKelvin"  shortname="J/K"     dimension="ThermalCapacity"  display="Standard" />
+  <unit name="JoulesPerKilogramPerDegreeKelvin"  shortname="J⋅kg⁻¹⋅K⁻¹"  dimension="SpecificHeat"  display="Standard" />
+
+  <!-- Non Standard Units -->
+  <unit name="Percent"     shortname="%"  dimension="Dimensionless" factor="0.01" display="Explicit" />
+  <unit name="Grams"       shortname="g"  dimension="Mass"   factor="0.001" display="Multi" />
+  <unit name="MicroGrams"  shortname="μg" dimension="Mass"   factor="0.000001" display="Multi" />
+  <unit name="NanoGrams"   shortname="ng" dimension="Mass"   factor="0.000000001" display="Multi" />
+  <unit name="Kilometres"  shortname="km" dimension="Length" factor="1000.0" display="Multi" />
+  <unit name="Centimetres" shortname="cm" dimension="Length" factor="0.01" display="Multi" />
+  <unit name="Millimetres" shortname="mm" dimension="Length" factor="0.001" display="Multi" />
+  <unit name="Micrometres" shortname="μ"  dimension="Length" factor="0.000001" display="Multi" />
+  <unit name="Nanometres"  shortname="nm"  dimension="Length" factor="0.000000001" display="Multi" />
+  <unit name="AccelerationOfGravity" shortname="g0" dimension="Acceleration"  factor="9.80665" display="Explicit" />
+  <unit name="Colories"  shortname="cal" dimension="Energy" factor="4.184" display="Explicit" />
+  <unit name="Kilowatts"  shortname="kW" dimension="Power" factor="1000.0" display="Multi" />
+  <unit name="KilowattHours"  shortname="kWh" dimension="Energy" factor="3.6e6" display="Multi" />
+  <unit name="DegreesCelsius" shortname="°C" dimension="TemperatureChange"   display="Explicit" />
+  <unit name="CaloriesPerDegreeKelvin"  shortname="cal/K" dimension="ThermalCapacity" factor="4.186" display="Explicit" />
+
+  <unit name="MilliSeconds" shortname="ms" dimension="Time" factor="0.001" display="Multi" />
+
+  <unit name="OhmMetres"    shortname="Ω⋅m" dimension="Resistivity"  display="Standard" />
+
+  <unit name="AstronomicalUnits" shortname="au" dimension="Length" factor="149597870700.0" display="Explicit" />
+  <unit name="Hectares" shortname="ha" dimension="Area" factor="10000.0" display="Multi" />
+  <unit name="Tonnes" shortname="t" dimension="Mass" factor="1000.0" display="Multi" />
+  <unit name="Daltons" shortname="Da" dimension="Mass" factor="1.660539040E-27" display="Explicit" />
+  <unit name="ElectronVolts" shortname="eV" dimension="Energy" factor="1.602176634E-19" display="Explicit" />
+  <unit name="Degrees" shortname="°"     dimension="Angle"  factor="0.01745329251994329576923690768489" display="Explicit" />
+  <unit name="KilometresPerHour" shortname="kph" dimension="Velocity" factor="0.2777777777777778" display="Explicit" />
+
+  <!-- Obsolete units still used in some contexts -->
+  <unit name="Dyne" shortname="dyn"       dimension="Force" factor="1e-5" display="Explicit"  />
+
+</units>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Keith Barrett 2021 -->
+<dimensions>
+  <dimension name="Dimensionless"     equals="new Dimensions(0, 0, 0)" />
+  <dimension name="Mass"              equals="new Dimensions(1, 0, 0)" />
+  <dimension name="Length"            equals="new Dimensions(0, 1, 0)" />
+  <dimension name="Time"              equals="new Dimensions(0, 0, 1)"/>
+  <dimension name="Current"           equals="new Dimensions(0, 0, 0, 1)"/>
+  <dimension name="TemperatureChange" equals="new Dimensions(0, 0, 0, 0, 1)"/>
+  <dimension name="AmountOfSubstance" equals="new Dimensions(0, 0, 0, 0, 0, 1)"/>
+  <dimension name="LuminousIntensity" equals="new Dimensions(0, 0, 0, 0, 0, 0, 1)"/>
+  <dimension name="Angle"             equals="new Dimensions(0, 0, 0, 0, 0, 0, 0, 1)" />
+  
+  <dimension name="Area"              equals="Length * Length" />
+  <dimension name="Volume"            equals="Area * Length" />
+  <dimension name="Density"           equals="Mass / Volume" />
+  <dimension name="Velocity"          equals="Length / Time" />
+  <dimension name="AngularVelocity"   equals="Angle / Time" >
+    <And equals="Velocity / Length" />
+  </dimension>
+  
+  <!-- Extra types to help with some calculations -->
+  <dimension name="TimeSquared"       equals="Time * Time" />
+  <dimension name="VelocitySquared"   equals="Velocity * Velocity" />
+  <dimension name="AngularVelocitySquared"   equals="AngularVelocity * AngularVelocity" />
+  
+  <dimension name="Acceleration"      equals="Velocity / Time" >
+    <And equals="VelocitySquared / Length" />
+    <And equals="Length / TimeSquared" />
+    <And equals="Length * AngularVelocitySquared" />
+  </dimension>
+  <dimension name="Momentum"          equals="Mass * Velocity" />
+  <dimension name="Force"             equals="Mass * Acceleration" >
+    <And equals="Momentum / Time" />
+  </dimension>
+  <dimension name="MomentOfInertia" equals="Mass * Area" />
+  <dimension name="AngularMomentum"  equals="MomentOfInertia * AngularVelocity" />
+  <dimension name="Energy"            equals="Force * Length" >
+    <And equals="Mass * VelocitySquared" />
+    <And equals="AngularMomentum * AngularVelocitySquared" />
+  </dimension>
+  <dimension name="ElectricCharge"    equals="Current * Time" />
+  <dimension name="ElectricPotential" equals="Energy / ElectricCharge" />
+  <dimension name="ElectricPotentialSquared" equals="ElectricPotential * ElectricPotential" />
+  <dimension name="Power"             equals="Energy / Time" >
+    <And equals="ElectricPotential * Current" />
+    <And equals="ElectricPotentialSquared / Resistance" />
+  </dimension>
+  <dimension name="Pressure"          equals="Force / Area" />
+  <dimension name="Frequency"         equals="Dimensionless / Time" >
+    <And equals="AngularVelocity / Angle" />
+  </dimension>
+  <dimension name="MassFlowRate"      equals="Mass / Time" />
+  <dimension name="VolumeFlowRate"    equals="Volume / Time" />
+  <dimension name="ThermalCapacity"   equals="Energy / TemperatureChange" />
+  <dimension name="SpecificHeat"      equals="ThermalCapacity / Mass" />
+  <dimension name="Resistance"        equals="ElectricPotential / Current" />
+  <dimension name="ResistanceTimesArea" equals="Resistance * Area" />
+  <dimension name="Resistivity"       equals="Resistance * Length" >
+    <And equals="ResistanceTimesArea / Length" />
+  </dimension>
+
+</dimensions>

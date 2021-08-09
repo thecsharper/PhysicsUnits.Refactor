@@ -1,0 +1,1203 @@
+<ul class="download">
+    <li><a href="Units.zip">Download source code - 160.4 KB</a></li>
+</ul>
+
+<h2>Introduction</h2>
+
+<p>The initial inspiration for this project is the loss of NASA&#39;s Mars Climate Orbiter in 1999. This failed to enter Mars orbit due to a mix up between metric (SI) and United States Customary Units. One sub-system was supplying measurements in pound-force seconds to another sub-system expecting them in Newton Seconds. As the probe braked to enter orbit, it travelled too close to the planet&#39;s atmosphere and either burned up or ricocheted off into solar orbit.</p>
+
+<p>So I have tried to build a code library in which this kind of error should be ruled out by design. It has the following features:</p>
+
+<ul>
+    <li>It can be used to perform many standard calculations from physics and engineering.</li>
+    <li>It is based on dimensional analysis, so all quantities have a corresponding physical dimension, such as Length or Mass.</li>
+    <li>It is strongly typed, so quantities of different dimension can only be combined in scientifically valid ways.</li>
+    <li>Internally, all values are stored in S.I. (metric) units.</li>
+    <li>Values are only converted to a particular system of units at its external interfaces, for example, when converting to and from <code>string</code>s.</li>
+</ul>
+
+<p>It is written using C# version 9 and utilizes the .NET 5.0 framework.</p>
+
+<p>Here is an example of the library in use:</p>
+
+<pre lang="cs">
+        // Tsiolkovsky rocket equation
+        Mass EmptyMass = 120000.Kilograms();
+        Mass PropellantMass = 1200000.Kilograms();
+        Mass WetMass = EmptyMass + PropellantMass;
+        Velocity ExhaustVelocity = 3700.MetresPerSecond();
+        Velocity DeltaV = ExhaustVelocity * Math.Log(WetMass / EmptyMass);
+        // DeltaV = 8872.21251 m/s</pre>
+
+<p>Throughout this article, and in the sample code and unit tests, I have used examples from my old grammar school physics textbook - <em>Nelkon and Parker Advanced Level Physics</em>. This was the standard sixth form physics book in Britain throughout the sixties and seventies.</p>
+
+<h2>Background</h2>
+
+<p>The library is based on the concepts of <em>dimensions</em> and <em>units</em>.</p>
+
+<h3>Dimensions</h3>
+
+<p>The <em>Dimension</em> of a physical quantity determines how it is related to a set of fundamental quantities such as mass, length and time. These are usually abbreviated to M, L, T, etc. New dimensions can be derived by combining these fundamental ones using multiplication and division. So:</p>
+
+<ul>
+    <li>Area = Length x Length = L&sup2;</li>
+    <li>Volume = Length x Length x Length = L&sup3;</li>
+    <li>Density = Mass / Volume = M/L&sup3; = ML⁻&sup3;</li>
+    <li>Velocity = Length / Time = L/T = LT⁻&sup1;</li>
+    <li>Acceleration = velocity / Time = LT⁻&sup2;</li>
+    <li>Force = Mass * Acceleration = MLT⁻&sup2;</li>
+</ul>
+
+<p>And so on.</p>
+
+<p>The dimension of any particular quantity can be represented as a sequence of powers of the fundamental dimensions (e.g., Force = MLT⁻&sup2; above). It is invalid to try to add or subtract quantities if their dimensions do not match. So it is invalid to <strong>add</strong> a mass to a volume for instance.</p>
+
+<p>The International System of Units (S.I.) uses the following basic dimensions:</p>
+
+<table class="ArticleTable">
+    <thead>
+        <tr>
+            <td>Dimension</td>
+            <td>Symbol</td>
+            <td>Unit</td>
+            <td>Unit Symbol</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Mass</td>
+            <td>M</td>
+            <td>kilogramme</td>
+            <td>kg</td>
+        </tr>
+        <tr>
+            <td>Length</td>
+            <td>L</td>
+            <td>metre</td>
+            <td>m</td>
+        </tr>
+        <tr>
+            <td>Time</td>
+            <td>T</td>
+            <td>second</td>
+            <td>s</td>
+        </tr>
+        <tr>
+            <td>Electric Current</td>
+            <td>I</td>
+            <td>ampere</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>Thermodynamic Temperature</td>
+            <td>&Theta;</td>
+            <td>kelvin</td>
+            <td>K</td>
+        </tr>
+        <tr>
+            <td>Amount of Substance</td>
+            <td>N</td>
+            <td>mole</td>
+            <td>mol</td>
+        </tr>
+        <tr>
+            <td>Luminous Intensity</td>
+            <td>J</td>
+            <td>candela</td>
+            <td>cd</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>The library defines these basic dimensions, and many derived ones.</p>
+
+<h3>Units</h3>
+
+<p>A unit system can define different basic units to correspond to the various dimensions. So whereas the S.I. system has a unit of kilogrammes for mass, the American and British systems use the pound. Similarly, we have the foot in place of the metre as the unit of length. There are also differences between the American and British systems when it comes to measurement of volume. Thankfully, the units for the other basic dimensions are the same in all three systems.</p>
+
+<p>Although the library has definitions for both the S.I., American and British systems, it is possible to create and use new ones. For example, you could create a system using the Japanese shakkanho system, with the shaku (尺) as the unit of length and the kan (貫) as the unit of mass.</p>
+
+<h2>Using the Code</h2>
+
+<p>The supplied code in the attached ZIP consists of a Visual Studio solution with two projects: the library itself and a command line programme which tests and demonstrates the library features. To use the library in your own project, add the library project file in &quot;<em>\KMB.Library.Units\KMB.Library.Units.csproj</em>&quot;, then add the following <code>using</code> statements to your code:</p>
+
+<pre lang="cs">
+using KMB.Library.Units;
+using KMB.Library.Units.Metric;
+using KMB.Library.Units.TimeUnits;      // for hours, minutes etc.
+using KMB.Library.Units.British;        // For feet and pounds.  Or use USA if you prefer</pre>
+
+<h3>Contents of the Library</h3>
+
+<p>The <code>Units</code> library defines various classes and interfaces. The primary ones are discussed here:</p>
+
+<h3>class <em>Dimensions</em></h3>
+
+<p>This class is used to represent a physical dimension or combination of them. It has a read-only field for the power of each dimension:</p>
+
+<pre lang="cs">
+        public readonly short M; // Mass
+        public readonly short L; // Length
+        public readonly short T; // Time
+        public readonly short I; // Current
+        public readonly short &Theta;; // Temperature
+        public readonly short N; // Amount of Substance
+        public readonly short J; // Luminous Intensity
+        public readonly short A; // Angle. </pre>
+
+<p>Note the value for angle. Strictly angles are dimensionless, but it is convenient to treat them as having a distinct dimension. This way, we can distinguish angles from dimensionless quantities, when converting to a <code>string</code>, for example.</p>
+
+<p>The class has various constructors, and also defines operators for multiplication and division:</p>
+
+<pre lang="cs">
+       public static Dimensions operator *(Dimensions d1, Dimensions d2)...
+       public static Dimensions operator /(Dimensions d1, Dimensions d2)...</pre>
+
+<p>Using this class, we can define the basic dimensions:</p>
+
+<pre lang="cs">
+        public static readonly Dimensions Dimensionless = new Dimensions(0, 0, 0);
+        public static readonly Dimensions Mass = new Dimensions(1, 0, 0);
+        public static readonly Dimensions Length = new Dimensions(0, 1, 0);
+        public static readonly Dimensions Time = new Dimensions(0, 0, 1);
+                :</pre>
+
+<p>And define any derived dimensions:</p>
+
+<pre lang="cs">
+        public static readonly Dimensions Area = Length * Length;
+        public static readonly Dimensions Volume = Area * Length;
+        public static readonly Dimensions Density = Mass / Volume;
+        public static readonly Dimensions Velocity = Length / Time;
+        public static readonly Dimensions AngularVelocity = Angle / Time;
+                :</pre>
+
+<p>The overloaded <code>ToString()</code> method of <code>Dimensions</code> outputs the powers of each dimension:</p>
+
+<pre lang="cs">
+        Dimensions.Pressure.ToString()  // returns &quot;M1 L-1 T-2&quot;
+        Dimensions.Resistivity.ToString()  // returns &quot;M1 L3 T-3 I-2&quot;</pre>
+
+<h3>Interface <em>IPhysicalQuantity</em></h3>
+
+<p>This interface is the basis for all physical quantities in the system. It has two properties:</p>
+
+<pre lang="cs">
+        double Value { get; }
+        Dimensions Dimensions { get; }</pre>
+
+<p>For each defined value of <code>Dimensions</code>, there will be a corresponding structure which implements the <code>IPhysicalQuantity</code> interface. For example, <code>Length</code>, <code>Area</code>, <code>Mass</code> and so on.</p>
+
+<h3>Example Physical Quantity - <em>Length</em></h3>
+
+<p>The <code>Length</code> structure implements the <code>IPhysicalQuantity</code> interface:</p>
+
+<pre lang="cs">
+        public readonly partial struct Length: IPhysicalQuantity</pre>
+
+<p>It has a read-only <code>Value</code> property:</p>
+
+<pre lang="cs">
+        public readonly double Value { get; init; }
+</pre>
+
+<p>And a <code>Dimensions</code> property:</p>
+
+<pre lang="cs">
+        public readonly Dimensions Dimensions { get { return Dimensions.Length; } }</pre>
+
+<p>Notice how the <code>Dimensions</code> property returns the corresponding statically defined <code>Dimensions</code> value.</p>
+
+<p>So given this structure, we can now define a variable to represent a particular length:</p>
+
+<pre lang="cs">
+        Length l0 = new Length(3.4);        // 3.4 metres</pre>
+
+<p>The <code>struct</code> defines lots of operators. For example, you can add a <code>length</code> to another one:</p>
+
+<pre lang="cs">
+        public static Length operator+(Length v1, Length v2)
+        {
+            return new Length(v1.Value + v2.Value);
+        }</pre>
+
+<p>Or compare two <code>length</code>s:</p>
+
+<pre lang="cs">
+       public static bool operator &gt;(Length v1, Length v2)
+        {
+            return Compare(v1, v2) &gt; 0;
+        }</pre>
+
+<p>Or you can create an <code>Area</code> by multiplying two <code>length</code>s together:</p>
+
+<pre lang="cs">
+        public static Area operator*(Length v1, Length v2)
+        {
+            return new Area(v1.Value * v2.Value);
+        }</pre>
+
+<p>Or a <code>Velocity</code> by dividing a <code>length</code> by a time:</p>
+
+<pre lang="cs">
+        public static Velocity operator/(Length v1, Time v2)
+        {
+            return new Velocity(v1.Value / v2.Value);
+        }</pre>
+
+<p>Here&#39;s this divide operator in use:</p>
+
+<pre lang="cs">
+        Length l = 100.Metres();
+        Time t = 9.58.Seconds();
+        Velocity v = l / t;         // v = 10.43 m/s</pre>
+
+<p>There are also various <code>ToString()</code> and <code>Parse()</code> methods:</p>
+
+<pre lang="cs">
+        public override string ToString();
+        public string ToString(UnitsSystem.FormatOption option);
+        public string ToString(UnitsSystem system, UnitsSystem.FormatOption option);
+        public string ToString(params Unit[] units);
+        public static Length Parse(string s);
+        public static Length Parse(string s, UnitsSystem system);</pre>
+
+<p>The formatting and parsing of <code>string</code>s is actually delegated to the current unit system. See below.</p>
+
+<p>Here are some examples to demonstrate the various options for <code>ToString()</code> and <code>Parse()</code>:</p>
+
+<pre lang="cs">
+Length l = 1234.567.Metres();
+string s = l.ToString();    // s = &quot;1.234567 km&quot; (same as BestFit)
+// Formatting options:
+s = l.ToString(UnitsSystem.FormatOption.Standard); // s = &quot;1234.567 m&quot; 
+                                                   // (standard unit for length is metres)
+s = l.ToString(UnitsSystem.FormatOption.BestFit);  // s = &quot;1.234567 km&quot; 
+                                                   // (kilometres is the best fit unit 
+                                                   // for the value)
+s = l.ToString(UnitsSystem.FormatOption.Multiple); // s = &quot;1 km 234 m 56 cm 7 mm&quot; 
+                                                   // (use multiple units in decreasing value)
+// Specify the units:
+s = l.ToString(MetricUnits.Metres, MetricUnits.Centimetres); // s = &quot;1234 m 56.7 cm&quot; 
+// British units:
+s = l.ToString(BritishUnits.System, UnitsSystem.FormatOption.Standard); // s = &quot;4050.41667 ft&quot;
+s = l.ToString(BritishUnits.System, UnitsSystem.FormatOption.BestFit);  // s = &quot;1350.13889 yd&quot;
+s = l.ToString(BritishUnits.System, UnitsSystem.FormatOption.Multiple); // s = &quot;1350 yd 5 in&quot;
+// Specified British units:
+s = l.ToString(BritishUnits.Miles, 
+               BritishUnits.Feet, BritishUnits.Inches); // s = &quot;4050 ft 5 in&quot;
+
+// Parsing
+l = Length.Parse(&quot;42 m&quot;);    // l = 42 m
+l = Length.Parse(&quot;42 m 76 cm&quot;); // l = 42.76 m
+l = Length.Parse(&quot;5 ft 4 in&quot;, BritishUnits.System); // l = 1.6256 m
+// This will throw an exception
+l = Length.Parse(&quot;42 m 76 kg&quot;);</pre>
+
+<p>Because there are so many classes, operators and methods required for the quantities, these classes are generated using the T4 Template processor. See the Code Generation section.</p>
+
+<h3>struct <em>PhysicalQuantity</em></h3>
+
+<p>This is the get out of jail card for cases when the strongly typed quantities won&#39;t do. It is weakly typed so has its own property to represent the dimensions:</p>
+
+<pre lang="cs">
+    public readonly partial struct PhysicalQuantity: IPhysicalQuantity
+    {
+        public double Value { get; init; }
+        public Dimensions Dimensions { get; init; }</pre>
+
+<p>Like the strongly typed quantities, it has operators for addition, etc., but these are checked at run time instead of preventing compilation. So it is possible to do this:</p>
+
+<pre lang="cs">
+        PhysicalQuantity l1 = new PhysicalQuantity(2.632, Dimensions.Length);
+        PhysicalQuantity l2 = new PhysicalQuantity(2.632, Dimensions.Length);
+        PhysicalQuantity sum = l1 + l2;</pre>
+
+<p>But this will throw an exception:</p>
+
+<pre lang="cs">
+        PhysicalQuantity m = new PhysicalQuantity(65, Dimensions.Mass);
+        sum = l1 + m;</pre>
+
+<p>But multiplication and division will correctly calculate the correct dimensions:</p>
+
+<pre lang="cs">
+        PhysicalQuantity product = l1 * m;
+        string s = product.ToString(); // s = &quot;171.08 kg&sdot;m&quot;</pre>
+
+<h3>class <em>UnitsSystem</em></h3>
+
+<p>The library defines an <code>abstract</code> base class for unit systems:</p>
+
+<pre lang="cs">
+        public abstract class UnitsSystem</pre>
+
+<p>Subclasses of <code>UnitsSystem</code> are responsible for converting quantities to and from <code>string</code>s. So there are various virtual methods for <code>string</code> conversion. There is also a static reference to the current units system, which defaults to <code>Metric</code>.</p>
+
+<pre lang="cs">
+        public static UnitsSystem Current = Metric;</pre>
+
+<p>By default, the <code>ToString()</code> and <code>Parse()</code> methods will use the current unit system.</p>
+
+<pre lang="cs">
+        internal static string ToString(IPhysicalQuantity qty)
+        {
+            return Current.DoToString(qty);
+        }</pre>
+
+<pre lang="cs">
+        internal static PhysicalQuantity Parse(string s)
+        {
+            return Current.DoParse(s);
+        }</pre>
+
+<p>Or you can specify which system to use:</p>
+
+<pre lang="cs">
+        internal static string ToString(IPhysicalQuantity qty, UnitsSystem system)
+        {
+            return system.DoToString(qty);
+        }</pre>
+
+<pre lang="cs">
+        public static PhysicalQuantity Parse(string s, UnitsSystem system)
+        {
+            return system.DoParse(s);
+        }</pre>
+
+<p>By default, the unit system will perform the <code>string</code> conversion using a lookup table of unit definitions. The unit definition uses this class:</p>
+
+<pre lang="cs">
+    public class Unit
+    {
+        public string Name;
+        public string ShortName;
+        public Dimensions Dimensions;
+        public double ConversionFactor; //to convert from ISO units
+                        :</pre>
+
+<p>So, for example, here are some of the definitions for the metric system:</p>
+
+<pre lang="cs">
+	public static Unit Metres = 
+      new Unit(&quot;metres&quot;, &quot;m&quot;, Dimensions.Length, 1.0, Unit.DisplayOption.Standard);
+	public static Unit SquareMetres = 
+      new Unit(&quot;squaremetres&quot;, &quot;m&sup2;&quot;, Dimensions.Area, 1.0, Unit.DisplayOption.Standard);
+	public static Unit CubicMetres = 
+      new Unit(&quot;cubicmetres&quot;, &quot;m&sup3;&quot;, Dimensions.Volume, 1.0, Unit.DisplayOption.Standard);
+	public static Unit Kilograms = 
+      new Unit(&quot;kilograms&quot;, &quot;kg&quot;, Dimensions.Mass, 1.0, Unit.DisplayOption.Standard);
+	public static Unit Seconds = 
+      new Unit(&quot;seconds&quot;, &quot;s&quot;, Dimensions.Time, 1.0, Unit.DisplayOption.Standard);</pre>
+
+<p>Or similar ones for the British units:</p>
+
+<pre lang="cs">
+	public static Unit Feet = new Unit
+      (&quot;feet&quot;, &quot;ft&quot;, Dimensions.Length, feetToMetres, Unit.DisplayOption.Standard);
+	public static Unit Inches = new Unit
+      (&quot;inches&quot;, &quot;in&quot;, Dimensions.Length, (feetToMetres/12.0), Unit.DisplayOption.Multi);
+	public static Unit Fortnight = new Unit
+      (&quot;fortnight&quot;, &quot;fn&quot;, Dimensions.Time, 3600.0*24.0*14.0, Unit.DisplayOption.Explicit);
+	public static Unit Pounds = new Unit
+      (&quot;pounds&quot;, &quot;lb&quot;, Dimensions.Mass, poundsToKilogrammes, Unit.DisplayOption.Standard);</pre>
+
+<p>The unit system also defines a set of extension methods like this:</p>
+
+<pre lang="cs">
+        public static Length Metres(this double v)
+        {
+                return new Length(v);
+        }</pre>
+
+<p>That allows easy creation of a quantity from a floating point or integer value:</p>
+
+<pre lang="cs">
+        Length l1 = 4.2.Metres();
+        Mass m1 = 12.Kilograms();</pre>
+
+<h2>Code Generation</h2>
+
+<p>As mentioned previously, because the library has a lot of repetitive code, we use the T4 macro processor available in Visual Studio. This tool allows us to automate the creation of source code by creating a template file which contains a mix of C# code and the required output text. In general, we start with an XML file of definitions which we read, then use the template to generate the required C# classes and data.</p>
+
+<p>For example, here is a line from the XML file defining the metric unit system:</p>
+
+<pre lang="xml">
+    &lt;unit name=&quot;Volts&quot; shortname=&quot;volt&quot; dimension=&quot;ElectricPotential&quot; display=&quot;Standard&quot; /&gt;</pre>
+
+<p>This template snippet will then create the static unit definitions:</p>
+
+<pre lang="cs">
+&lt;#+ foreach(var ui in unitInfoList)
+    {
+#&gt;
+		public static Unit &lt;# =ui.longName #&gt; = new Unit(&quot;&lt;# =ui.longName.ToLower() #&gt;&quot;, 
+                           &quot;&lt;# =ui.shortName #&gt;&quot;,
+                        Dimensions.&lt;# =ui.dimension #&gt;, &lt;# =ui.factor #&gt;, 
+                        Unit.DisplayOption.&lt;# =ui.displayOption #&gt;);
+&lt;#+ }	// end foreach ui
+#&gt;</pre>
+
+<p>Resulting in a line like this in the final code:</p>
+
+<pre lang="cs">
+	public static Unit Volts = new Unit
+      (&quot;volts&quot;, &quot;volt&quot;, Dimensions.ElectricPotential, 1.0, Unit.DisplayOption.Standard);</pre>
+
+<p>This technique allows us to generate the large number of operator definitions we require for each quantity class. For example, given this definition in the <em>Dimensions.xml</em> file:</p>
+
+<pre lang="xml">
+    &lt;dimension name=&quot;Density&quot; equals=&quot;Mass / Volume&quot; /&gt;</pre>
+
+<p>We can generate the <code>Density</code> class and all of the following operators:</p>
+
+<pre lang="cs">
+        public static Density operator/(Mass v1, Volume v2)
+        public static Volume operator/(Mass v1, Density v2)
+        public static Mass operator*(Volume v1, Density v2)</pre>
+
+<p>The following XML definition files are supplied:</p>
+
+<table class="ArticleTable">
+    <thead>
+        <tr>
+            <td>File</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><em>Dimensions.xml</em></td>
+            <td>This defines the dimensions and the relations between them</td>
+        </tr>
+        <tr>
+            <td><em>MetricUnits.xml</em></td>
+            <td>Unit definitions for the metric system</td>
+        </tr>
+        <tr>
+            <td><em>BritishUnits.xml</em></td>
+            <td>British units like foot and pound</td>
+        </tr>
+        <tr>
+            <td><em>USAUnits.xml</em></td>
+            <td>American Units. These overlap with the British units somewhat.</td>
+        </tr>
+        <tr>
+            <td><em>TimeUnits.xml</em></td>
+            <td>Units of time apart from the second, such as hours and days</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Summmary Table</h2>
+<p>This table summarises the dimensions, formulae and units supported by the library:</p>
+<table class="ArticleTable">
+    <tr>
+        <th>Name</th>
+        <th>Formula</th>
+        <th>Dimensions</th>
+        <th>Units</th>
+    </tr>
+    <tr>
+        <td>AbsoluteTemperature</td>
+        <td />
+        <td>Θ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>K	(Kelvin)</li>
+                <li>°C	(Celsius)</li>
+                <li>°F	(Fahrenheit)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Acceleration</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Velocity / Time</li>
+                <li>VelocitySquared / Length</li>
+                <li>Length / TimeSquared</li>
+                <li>Length * AngularVelocitySquared</li>
+            </ul>
+        </td>
+        <td>L T⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>m/s²	(MetresPerSecondSquared)</li>
+                <li>g0	(AccelerationOfGravity)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>AmountOfSubstance</td>
+        <td />
+        <td>N </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>mol	(Mole)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Angle</td>
+        <td />
+        <td>A </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>rad	(Radians)</li>
+                <li>°	(Degrees)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>AngularMomentum</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>MomentOfInertia * AngularVelocity</li>
+            </ul>
+        </td>
+        <td>M L² T⁻¹ A </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg⋅m²⋅rad⋅s⁻¹</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>AngularVelocity</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Angle / Time</li>
+                <li>Velocity / Length</li>
+            </ul>
+        </td>
+        <td>T⁻¹ A </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>rad⋅s⁻¹</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>AngularVelocitySquared</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>AngularVelocity * AngularVelocity</li>
+            </ul>
+        </td>
+        <td>T⁻² A² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>rad²⋅s⁻²</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Area</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Length * Length</li>
+            </ul>
+        </td>
+        <td>L² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>m²	(SquareMetres)</li>
+                <li>ha	(Hectares)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Current</td>
+        <td />
+        <td>I </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>amp	(Ampere)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Density</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Mass / Volume</li>
+            </ul>
+        </td>
+        <td>M L⁻³ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg/m³	(KilogramsPerCubicMetre)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Dimensionless</td>
+        <td />
+        <td></td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>1	(Ones)</li>
+                <li>%	(Percent)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>ElectricCharge</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Current * Time</li>
+            </ul>
+        </td>
+        <td>T I </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>amp⋅s</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>ElectricPotential</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Energy / ElectricCharge</li>
+            </ul>
+        </td>
+        <td>M L² T⁻³ I⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>volt	(Volts)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>ElectricPotentialSquared</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>ElectricPotential * ElectricPotential</li>
+            </ul>
+        </td>
+        <td>M² L⁴ T⁻⁶ I⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg²⋅m⁴⋅amp⁻²⋅s⁻⁶</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Energy</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Force * Length</li>
+                <li>Mass * VelocitySquared</li>
+                <li>AngularMomentum * AngularVelocitySquared</li>
+            </ul>
+        </td>
+        <td>M L² T⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>J	(Joules)</li>
+                <li>cal	(Colories)</li>
+                <li>kWh	(KilowattHours)</li>
+                <li>eV	(ElectronVolts)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Force</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Mass * Acceleration</li>
+                <li>Momentum / Time</li>
+            </ul>
+        </td>
+        <td>M L T⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>N	(Newtons)</li>
+                <li>dyn	(Dyne)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Frequency</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Dimensionless / Time</li>
+                <li>AngularVelocity / Angle</li>
+            </ul>
+        </td>
+        <td>T⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Hz	(Hertz)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Length</td>
+        <td />
+        <td>L </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>m	(Metres)</li>
+                <li>km	(Kilometres)</li>
+                <li>cm	(Centimetres)</li>
+                <li>mm	(Millimetres)</li>
+                <li>μ	(Micrometres)</li>
+                <li>nm	(Nanometres)</li>
+                <li>au	(AstronomicalUnits)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>LuminousIntensity</td>
+        <td />
+        <td>J </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>cd	(Candela)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Mass</td>
+        <td />
+        <td>M </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg	(Kilograms)</li>
+                <li>g	(Grams)</li>
+                <li>μg	(MicroGrams)</li>
+                <li>ng	(NanoGrams)</li>
+                <li>t	(Tonnes)</li>
+                <li>Da	(Daltons)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>MassFlowRate</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Mass / Time</li>
+            </ul>
+        </td>
+        <td>M T⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg/s	(KilogramsPerSecond)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>MomentOfInertia</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Mass * Area</li>
+            </ul>
+        </td>
+        <td>M L² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg⋅m²</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Momentum</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Mass * Velocity</li>
+            </ul>
+        </td>
+        <td>M L T⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg⋅m/s	(KilogramMetresPerSecond)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Power</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Energy / Time</li>
+                <li>ElectricPotential * Current</li>
+                <li>ElectricPotentialSquared / Resistance</li>
+            </ul>
+        </td>
+        <td>M L² T⁻³ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>W	(Watts)</li>
+                <li>kW	(Kilowatts)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Pressure</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Force / Area</li>
+            </ul>
+        </td>
+        <td>M L⁻¹ T⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Pa	(Pascals)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Resistance</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>ElectricPotential / Current</li>
+            </ul>
+        </td>
+        <td>M L² T⁻³ I⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Ω	(Ohms)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>ResistanceTimesArea</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Resistance * Area</li>
+            </ul>
+        </td>
+        <td>M L⁴ T⁻³ I⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>kg⋅m⁴⋅amp⁻²⋅s⁻³</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Resistivity</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Resistance * Length</li>
+                <li>ResistanceTimesArea / Length</li>
+            </ul>
+        </td>
+        <td>M L³ T⁻³ I⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Ω⋅m	(OhmMetres)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>SpecificHeat</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>ThermalCapacity / Mass</li>
+            </ul>
+        </td>
+        <td>L² T⁻² Θ⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>J⋅kg⁻¹⋅K⁻¹	(JoulesPerKilogramPerDegreeKelvin)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>TemperatureChange</td>
+        <td />
+        <td>Θ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>K	(Kelvin)</li>
+                <li>°C	(Celsius)</li>
+                <li>°F	(Fahrenheit)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>ThermalCapacity</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Energy / TemperatureChange</li>
+            </ul>
+        </td>
+        <td>M L² T⁻² Θ⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>J/K	(JoulesPerDegreeKelvin)</li>
+                <li>cal/K	(CaloriesPerDegreeKelvin)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Time</td>
+        <td />
+        <td>T </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>s	(Seconds)</li>
+                <li>ms	(MilliSeconds)</li>
+                <li>min	(Minutes)</li>
+                <li>hr	(Hours)</li>
+                <li>day	(Days)</li>
+                <li>week	(Weeks)</li>
+                <li>yr	(JulianYears)</li>
+                <li>aₛ	(SiderialYears)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>TimeSquared</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Time * Time</li>
+            </ul>
+        </td>
+        <td>T² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>s²</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Velocity</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Length / Time</li>
+            </ul>
+        </td>
+        <td>L T⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>m/s	(MetresPerSecond)</li>
+                <li>kph	(KilometresPerHour)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>VelocitySquared</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Velocity * Velocity</li>
+            </ul>
+        </td>
+        <td>L² T⁻² </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>m²⋅s⁻²</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Volume</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Area * Length</li>
+            </ul>
+        </td>
+        <td>L³ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>m³	(CubicMetres)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>VolumeFlowRate</td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>Volume / Time</li>
+            </ul>
+        </td>
+        <td>L³ T⁻¹ </td>
+        <td>
+            <ul style="list-style-type:none">
+                <li>m³/s	(CubicMetresPerSecond)</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<h2>More Examples</h2>
+
+<p>Here are some more examples using the library, based on questions from <em>Nelkon and Parker</em>.</p>
+
+<p>The reckless jumper:</p>
+
+<pre lang="cs">
+        // A person of mass 50 kg who is jumping from a height of 5 metres 
+        // will land on the ground
+        // with a velocity = &radic;2gh = &radic; 2 x 9.8 x 5 = 9.9 m/s , assuming g = 9.8 m/s.
+    	Mass m = 50.Kilograms();
+        Length h = 5.Metres();
+        Acceleration g = 9.80665.MetresPerSecondSquared();
+        Velocity v = Functions.Sqrt(2 * g * h); // v = 9.90285312 m/s
+        // If he does not flex his knees on landing, 
+        // he will be brought to rest very quickly, say in
+        // 1/10th second.  The force F acting is then given 
+        // by momentum change/time = 50 * 9.9 / 0.1 = 4951 N
+        Momentum mm = m * v;
+        Time t = 0.1.Seconds();
+        Force f = mm / t; // f = 4951.42656 N</pre>
+
+<p>And the flying cricket ball:</p>
+
+<pre lang="cs">
+        // Suppose a cricket ball was thrown straight up with an initial velocity, 
+        // u, of 30 m/s.
+        // The time taken to reach the top of its motion can be obtained from the equation
+        // v = u + at.
+        // The velocity, v, at the top is zero; and since u = 30 m and 
+        // a = &mdash;9.8 or 10 m/s&sup2;(approx),
+        // we have 30 - 10t = 0.
+        // Therefore t = 30 / 10 = 3s
+        // The highest distance reached is thus given by
+        // d = ut + 1 / 2 at ^ 2 = 30x3 - 5x3 ^ 2 = 45 m.
+        var u = 30.MetresPerSecond();
+        var g = 9.80665.MetresPerSecondSquared();
+        var t = u / g;  // t = 3.05914864 s
+        var d = u * t + -g * t * t / 2.0;   // d = 45.8872296 m</pre>
+
+<h2>Points of Interest</h2>
+
+<h3>Unit Tests</h3>
+
+<p>The sample program also tests the library, but does not use a unit testing framework. Instead, it uses a simple static class <code>Check</code> which allows us to write code like this:</p>
+
+<pre lang="cs">
+       Check.Equal(42.0, d5, &quot;wrong value for d5&quot;);
+</pre>
+
+<p>This will throw an exception if the first two arguments are not equal.</p>
+
+<h3>Performance</h3>
+
+<p>I had hoped that by creating immutable data types and making copious use of the aggressive inlining and aggressive optimization hints that the performance of the quantity classes would be comparable to the performance of &#39;raw&#39; doubles. But this has turned out not to be the case. To test this, I implemented the same rocket simulation twice, once using plain doubles and again using the quantity classes. In a release build, the version using <code>double</code>s is around 6 times faster. The reason can be seen by examining the code generated for some typical arithmetic. For example, this code:</p>
+
+<pre lang="cs">
+        double d1 = 4.2;
+        double d2 = 5.3;
+        double d3 = 6.4;
+        double d4 = d1 + d2 + d3;</pre>
+
+<p>Generates code for the addition like this:</p>
+
+<pre lang="text">
+00007FFCCC4B6A46  vmovsd      xmm3,qword ptr [rbp-8]  
+00007FFCCC4B6A4B  vaddsd      xmm3,xmm3,mmword ptr 
+                              [UnitTests.Program.TestDouble()+0B0h (07FFCCC4B6AC0h)]  
+00007FFCCC4B6A53  vaddsd      xmm3,xmm3,mmword ptr [rbp-10h]  
+00007FFCCC4B6A58  vmovsd      qword ptr [rbp-18h],xmm3  </pre>
+
+<p>Whereas the same formula using the class library:</p>
+
+<pre lang="cs">
+        Dimensionless d1 = 4.2;
+        Dimensionless d2 = 5.3;
+        Dimensionless d3 = 6.4;
+        Dimensionless d4 = d1 + d2 + d3;</pre>
+
+<p>Generates much longer code:</p>
+
+<pre lang="text">
+00007FFCD5726B59  mov         rcx,qword ptr [rsp+70h]  
+00007FFCD5726B5E  mov         qword ptr [rsp+58h],rcx  
+00007FFCD5726B63  mov         rcx,qword ptr [rsp+68h]  
+00007FFCD5726B68  mov         qword ptr [rsp+50h],rcx  
+00007FFCD5726B6D  vmovsd      xmm0,qword ptr [rsp+58h]  
+00007FFCD5726B73  vaddsd      xmm0,xmm0,mmword ptr [rsp+50h]  
+00007FFCD5726B79  vmovsd      qword ptr [rsp+48h],xmm0  
+00007FFCD5726B7F  mov         rcx,qword ptr [rsp+48h]  
+00007FFCD5726B84  mov         qword ptr [rsp+40h],rcx  
+00007FFCD5726B89  mov         rcx,qword ptr [rsp+60h]  
+00007FFCD5726B8E  mov         qword ptr [rsp+38h],rcx  
+00007FFCD5726B93  vmovsd      xmm0,qword ptr [rsp+40h]  
+00007FFCD5726B99  vaddsd      xmm0,xmm0,mmword ptr [rsp+38h]  
+00007FFCD5726B9F  vmovsd      qword ptr [rsp+30h],xmm0  
+00007FFCD5726BA5  mov         rcx,qword ptr [rsp+30h]  
+00007FFCD5726BAA  mov         qword ptr [rsp+78h],rcx  </pre>
+
+<p>There are lots of superfluous move instructions. Perhaps someone with a deeper understanding of the JIT compiler can shed some light on this.</p>
+
+<h3>Comparison with F#</h3>
+
+<p>The F# language has built in support for units of measure, which also has the aim of preventing programming errors. So it is possible to write statements like this:</p>
+
+<pre lang="F#">
+    let l1 = 12.0&lt;m&gt;	    // define a length in metres
+    let l2 = 7.0&lt;m&gt;	        // define another length
+    let l3 = l1 + l2        // add lengths together
+    let a = l1 * l2         // define an area (a has type float&lt;m^2&gt;)
+    let v = l1 * l2 * l3    // define a volume (v has type float&lt;m^3&gt;)
+    let m1 = 5.0&lt;kg&gt;	    // define a mass in kilogrammes
+    let d = m1 / v;         // define a density (d has type float&lt;kg/m^3&gt;)</pre>
+
+<p>And given the above, this statement will not compile:</p>
+
+<pre lang="F#">
+    let x = m1 + l1; // !! The unit of measure &#39;m&#39; does not match the unit of measure &#39;kg&#39;
+</pre>
+
+<p>The standard library of units defines the basic S.I. unit like metre, but does not define derived units like centimetres. You can define your own units like this:</p>
+
+<pre lang="F#">
+[&lt;Measure&gt;] type cm     // centimetres
+</pre>
+
+<p>And you can use it in the same way:</p>
+
+<pre lang="F#">
+    let l4 = 42.0&lt;cm&gt;</pre>
+
+<p>But there is no way to indicate that centimetres and metres are the same dimension. So whereas <code>l1</code> above has type <code>float&lt;m&gt;</code>, <code>l4</code> has type <code>float&lt;cm&gt;</code>, and attempting to add them will not compile:</p>
+
+<pre lang="F#">
+    let l5 = l1 + l4;    // !! The unit of measure &#39;cm&#39; does not match the unit of measure &#39;m&#39;
+</pre>
+
+<p>You can only get around this by defining a conversion function:</p>
+
+<pre lang="F#">
+let convertcm2m (x : float&lt;cm&gt;) = x / 1000.0&lt;cm/m&gt;</pre>
+
+<p>Then using it in the expression:</p>
+
+<pre lang="F#">
+    let l5 = l1 + convertcm2m(l4);</pre>
+
+<p>You also have to be careful to always use the same numeric type when using units of measure. This is because in this definition:</p>
+
+<pre lang="F#">
+    let l6 = 5&lt;m&gt;</pre>
+
+<p>The type of <code>l6</code> is <code>int&lt;m&gt;</code>, and this cannot be added to a value of type <code>float&lt;m&gt;</code>. So this line will not compile either:</p>
+
+<pre lang="F#">
+    let l7 = l1 + l6;           // !! The type float&lt;m&gt; does not match the type int&lt;m&gt;</pre>
+
+<p>Finally, although the units of measure are checked at compile time, the types do not carry through to the compiled code. The values are just defined as floating point numbers. Consequently, you cannot discover at run time what the unit of measure of a value actually is. So you can only print these types of values as floating point, like this:</p>
+
+<pre lang="F#">
+    printfn &quot;l5 = %e&quot; l5        // outputs &quot;l5 = 1.204200e+001&quot; </pre>
+
+<p>Even if you use the format specifier <code>%O</code>:</p>
+
+<pre lang="F#">
+    printfn &quot;l5 = %O&quot; l5        // outputs &quot;l5 = 12.042&quot; </pre>
+
+<p>So although the F# system has the same goal of preventing invalid mathematical operations, it is more restrictive due to its basis on units rather than dimensions.</p>
+
+<h2>History</h2>
+
+<ul>
+    <li>6<sup>th</sup> July, 2021: Initial version</li>
+    <li>6<sup>th</sup> August, 2021: Added table summarising the contants of the library.</li>
+</ul>
+
+<p>I&#39;ve been working on this for nearly a year in my spare time. But there hasn&#39;t been much of that - I&#39;ve been busy despite the pandemic.</p>
+
+<p>Currently, the library has the basics in place, and can be used for equations in dynamics and some electrics. I am continuing to add more derived dimensions and quantity classes to support more equations as I gradually work my way through <em>Nelkon and Parker</em>.</p>

@@ -1,0 +1,40 @@
+﻿<#@ include file="GenerateTypes.t4"#>  
+<#
+   LoadDimensionInfo("Dimensions.xml"); 
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KMB.Library.Units
+{
+	// Generated from Dimensions.xml
+    public partial class Dimensions
+    {
+<#
+	foreach(var di in dimensionList)
+	{
+#>
+        public static readonly Dimensions <#= di.name #> = <#= di.equals #>;
+<#
+	}	// end for ti
+#>
+
+        public static readonly Dimensions[] allDimensions = new Dimensions[]
+		{
+<#
+	foreach(var di in dimensionList)
+	{
+#>
+			<#= di.name #>,
+<#
+	}	// end for di
+#>
+		};
+
+    }
+}
+<#+
+#>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Keith Barrett 2021 -->
+<units name="USA">
+  <constant name="poundsToKilogrammes" value="0.45359237" />
+  <constant name="feetToMetres" value="0.3048" />
+  <constant name="squareFeetToSquareMetres" value="(feetToMetres * feetToMetres)" />
+  <constant name="cubicFeetToCubicMetres" value="(feetToMetres * feetToMetres * feetToMetres)" />
+  <constant name="litresToCubicMetres" value="0.001" />
+
+  <!-- Mass -->
+  <unit name="LongTons"       shortname="ton" dimension="Mass" factor="poundsToKilogrammes*2240.0" display="Multi" />
+  <unit name="Pounds"         shortname="lb" dimension="Mass" factor="poundsToKilogrammes" display="Standard" />
+
+  <!-- Length -->
+  <unit name="Inches" shortname="in" dimension="Length" factor="(feetToMetres/12.0)"/>
+  <unit name="Feet" shortname="ft" dimension="Length" factor="feetToMetres" default="true"/> 
+  <unit name="Yards" shortname="yrd" dimension="Length" factor="(feetToMetres*3.0)" />
+  <unit name="NauticalMiles" shortname="nmi" dimension="Length" factor="1852" display="Explicit" />
+
+  <!-- Area -->
+  <unit name="SquareFeet" shortname="ft²" dimension="Area" factor="(feetToMetres*feetToMetres)" />
+  <unit name="Acres" shortname="acre" dimension="Area" factor="43560*squareFeetToSquareMetres" display="Multi" />
+  <unit name="SquareYards" shortname="yd²" dimension="Area" factor="9*squareFeetToSquareMetres" display="Explicit" />
+  <unit name="SquareInch" shortname="in²" dimension="Area" factor="0.0069*squareFeetToSquareMetres" display="Explicit" />
+  
+  <!-- Volume -->
+  <unit name="CubicFeet" shortname="ft³" dimension="Volume" factor="cubicFeetToCubicMetres" display="Standard" />
+  <unit name="CubicYards" shortname="yd³" dimension="Volume" factor="27*cubicFeetToCubicMetres" display="Standard" />
+  <unit name="CubicInches" shortname="in³" dimension="Volume" factor="0.00058*cubicFeetToCubicMetres" display="Multi" />
+  <!-- US Liquid measures -->
+  <unit name="Gallons" shortname="gal" dimension="Volume" factor="3.78541*litresToCubicMetres" display="Multi" />
+  <unit name="Quarts" shortname="qt" dimension="Volume" factor="0.946353*litresToCubicMetres" display="Multi" />
+  <!-- US dry measures -->
+  <unit name="DryGallons" shortname="gal" dimension="Volume" factor="4.404884*litresToCubicMetres" display="Multi" />
+  <unit name="DryQuarts" shortname="qt" dimension="Volume" factor="1.101221*litresToCubicMetres" display="Multi" />
+  <unit name="Bushels" shortname="bu" dimension="Volume" factor="35.23907016688*litresToCubicMetres" display="Multi" />
+
+</units>
