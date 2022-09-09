@@ -1,15 +1,10 @@
-﻿  
-// Keith Barrett 2021
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Runtime.CompilerServices;
 
 namespace KMB.Library.Units
 {
-	// Generated from Dimensions.xml
-	public readonly partial struct Dimensionless: IPhysicalQuantity
+    // Generated from Dimensions.xml
+    public readonly partial struct Dimensionless: IPhysicalQuantity
     {
         public readonly double Value { get; init; }
 		public readonly Dimensions Dimensions { get { return Dimensions.Dimensionless; } }
@@ -63,17 +58,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out Dimensionless q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new Dimensionless(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new Dimensionless(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out Dimensionless q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new Dimensionless(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new Dimensionless(0);
 			return retVal;
 		}
 		#endregion
@@ -293,17 +286,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out Mass q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new Mass(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new Mass(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out Mass q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new Mass(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new Mass(0);
 			return retVal;
 		}
 		#endregion
@@ -326,7 +317,7 @@ namespace KMB.Library.Units
         {
             if (obj != null && obj is IPhysicalQuantity)
             {
-                PhysicalQuantity pq = new PhysicalQuantity(this);
+                PhysicalQuantity pq = new(this);
                 return PhysicalQuantity.Compare(pq, obj as IPhysicalQuantity) == 0;
             }
             else
@@ -570,17 +561,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out Length q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new Length(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new Length(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out Length q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new Length(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new Length(0);
 			return retVal;
 		}
 		#endregion
@@ -603,7 +592,7 @@ namespace KMB.Library.Units
         {
             if (obj != null && obj is IPhysicalQuantity)
             {
-                PhysicalQuantity pq = new PhysicalQuantity(this);
+                PhysicalQuantity pq = new(this);
                 return PhysicalQuantity.Compare(pq, obj as IPhysicalQuantity) == 0;
             }
             else
@@ -811,11 +800,11 @@ namespace KMB.Library.Units
 	#region powers
         public Area Squared()
         {
-            return new Area(this.Value * this.Value);
+            return new Area(Value * Value);
         }
         public Volume Cubed()
         {
-            return new Volume(this.Value * this.Value * this.Value);
+            return new Volume(Value * Value * Value);
         }
 	#endregion
 
@@ -875,17 +864,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out Time q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new Time(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new Time(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out Time q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new Time(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new Time(0);
 			return retVal;
 		}
 		#endregion
@@ -908,7 +895,7 @@ namespace KMB.Library.Units
         {
             if (obj != null && obj is IPhysicalQuantity)
             {
-                PhysicalQuantity pq = new PhysicalQuantity(this);
+                PhysicalQuantity pq = new(this);
                 return PhysicalQuantity.Compare(pq, obj as IPhysicalQuantity) == 0;
             }
             else
@@ -1104,7 +1091,7 @@ namespace KMB.Library.Units
 	#region powers
         public TimeSquared Squared()
         {
-            return new TimeSquared(this.Value * this.Value);
+            return new TimeSquared(Value * Value);
         }
 	#endregion
 
@@ -1164,17 +1151,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out Current q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new Current(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new Current(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out Current q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new Current(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new Current(0);
 			return retVal;
 		}
 		#endregion
@@ -1197,7 +1182,7 @@ namespace KMB.Library.Units
         {
             if (obj != null && obj is IPhysicalQuantity)
             {
-                PhysicalQuantity pq = new PhysicalQuantity(this);
+                PhysicalQuantity pq = new(this);
                 return PhysicalQuantity.Compare(pq, obj as IPhysicalQuantity) == 0;
             }
             else
@@ -1359,7 +1344,7 @@ namespace KMB.Library.Units
  		[MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         public TemperatureChange(double v)
         {
-            this.Value = v;
+            Value = v;
         }
 
  		[MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -1367,7 +1352,7 @@ namespace KMB.Library.Units
         {
 			if(q.Dimensions != Dimensions.TemperatureChange)
 				throw new Exception("Invalid conversion from PhysicalQuantity to TemperatureChange");
-            this.Value = q.Value;
+            Value = q.Value;
         }
 		
 		#region String conversion methods
@@ -1405,17 +1390,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out TemperatureChange q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new TemperatureChange(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new TemperatureChange(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out TemperatureChange q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new TemperatureChange(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new TemperatureChange(0);
 			return retVal;
 		}
 		#endregion
@@ -1438,7 +1421,7 @@ namespace KMB.Library.Units
         {
             if (obj != null && obj is IPhysicalQuantity)
             {
-                PhysicalQuantity pq = new PhysicalQuantity(this);
+                PhysicalQuantity pq = new(this);
                 return PhysicalQuantity.Compare(pq, obj as IPhysicalQuantity) == 0;
             }
             else
@@ -1588,7 +1571,7 @@ namespace KMB.Library.Units
  		[MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         public AmountOfSubstance(double v)
         {
-            this.Value = v;
+            Value = v;
         }
 
  		[MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -1596,7 +1579,7 @@ namespace KMB.Library.Units
         {
 			if(q.Dimensions != Dimensions.AmountOfSubstance)
 				throw new Exception("Invalid conversion from PhysicalQuantity to AmountOfSubstance");
-            this.Value = q.Value;
+            Value = q.Value;
         }
 		
 		#region String conversion methods
@@ -1634,17 +1617,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out AmountOfSubstance q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new AmountOfSubstance(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new AmountOfSubstance(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out AmountOfSubstance q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new AmountOfSubstance(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new AmountOfSubstance(0);
 			return retVal;
 		}
 		#endregion
@@ -1667,7 +1648,7 @@ namespace KMB.Library.Units
         {
             if (obj != null && obj is IPhysicalQuantity)
             {
-                PhysicalQuantity pq = new PhysicalQuantity(this);
+                PhysicalQuantity pq = new(this);
                 return PhysicalQuantity.Compare(pq, obj as IPhysicalQuantity) == 0;
             }
             else
@@ -1857,17 +1838,15 @@ namespace KMB.Library.Units
 
 		public static bool TryParse(string s, out LuminousIntensity q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, out qty);
-			q = retVal ? qty : new LuminousIntensity(0);
+            bool retVal = UnitsSystem.TryParse(s, out PhysicalQuantity qty);
+            q = retVal ? qty : new LuminousIntensity(0);
 			return retVal;
 		}
 
 		public static bool TryParse(string s, UnitsSystem system, out LuminousIntensity q)
 		{
-			PhysicalQuantity qty;
-		    bool retVal = UnitsSystem.TryParse(s, system, out qty);
-			q = retVal ? qty : new LuminousIntensity(0);
+            bool retVal = UnitsSystem.TryParse(s, system, out PhysicalQuantity qty);
+            q = retVal ? qty : new LuminousIntensity(0);
 			return retVal;
 		}
 		#endregion
@@ -1890,7 +1869,7 @@ namespace KMB.Library.Units
         {
             if (obj != null && obj is IPhysicalQuantity)
             {
-                PhysicalQuantity pq = new PhysicalQuantity(this);
+                var pq = new PhysicalQuantity(this);
                 return PhysicalQuantity.Compare(pq, obj as IPhysicalQuantity) == 0;
             }
             else
@@ -2034,7 +2013,7 @@ namespace KMB.Library.Units
  		[MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         public Angle(double v)
         {
-            this.Value = v;
+            Value = v;
         }
 
  		[MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -2042,7 +2021,7 @@ namespace KMB.Library.Units
         {
 			if(q.Dimensions != Dimensions.Angle)
 				throw new Exception("Invalid conversion from PhysicalQuantity to Angle");
-            this.Value = q.Value;
+            Value = q.Value;
         }
 		
 		#region String conversion methods

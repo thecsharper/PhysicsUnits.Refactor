@@ -34,5 +34,4 @@
   <unit name="DryGallons" shortname="gal" dimension="Volume" factor="4.404884*litresToCubicMetres" display="Multi" />
   <unit name="DryQuarts" shortname="qt" dimension="Volume" factor="1.101221*litresToCubicMetres" display="Multi" />
   <unit name="Bushels" shortname="bu" dimension="Volume" factor="35.23907016688*litresToCubicMetres" display="Multi" />
-
 </units>

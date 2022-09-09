@@ -1,18 +1,7 @@
-﻿// Keith Barrett 2021
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace KMB.Library.Units
 {
-    public interface IPhysicalQuantity
-    {
-        double Value { get; }
-        Dimensions Dimensions { get; }
-    }
-    
     public readonly partial struct PhysicalQuantity: IPhysicalQuantity
     {
         public double Value { get; init; }
@@ -20,14 +9,14 @@ namespace KMB.Library.Units
 
         public PhysicalQuantity(double v, Dimensions d)
         {
-            this.Value = v;
-            this.Dimensions = d;
+            Value = v;
+            Dimensions = d;
         }
 
         public PhysicalQuantity(IPhysicalQuantity q)
         {
-            this.Value = q.Value;
-            this.Dimensions = q.Dimensions;
+            Value = q.Value;
+            Dimensions = q.Dimensions;
         }
 
         public override string ToString()
@@ -56,7 +45,7 @@ namespace KMB.Library.Units
             if (obj != null && obj is IPhysicalQuantity)
             {
                 IPhysicalQuantity pq = obj as IPhysicalQuantity;
-                return PhysicalQuantity.Compare(this, pq) == 0;
+                return Compare(this, pq) == 0;
             }
             else
                 return false;
@@ -145,9 +134,6 @@ namespace KMB.Library.Units
             return new PhysicalQuantity(Math.Pow(v.Value, p), v.Dimensions ^ p);
         }
 
-
         #endregion
     }
-
-
 }

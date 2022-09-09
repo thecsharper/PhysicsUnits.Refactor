@@ -1,8 +1,6 @@
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\bin\Debug\net5.0\KMB.Library.Units.deps.json
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\bin\Debug\net5.0\KMB.Library.Units.dll
-D:\Develop\PhysicsUnits\Units\KMB.Library.Units\bin\Debug\net5.0\ref\KMB.Library.Units.dll
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\bin\Debug\net5.0\KMB.Library.Units.pdb
-D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Units.csproj.AssemblyReference.cache
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Units.GeneratedMSBuildEditorConfig.editorconfig
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Units.AssemblyInfoInputs.cache
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Units.AssemblyInfo.cs
@@ -10,3 +8,5 @@ D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Uni
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Units.dll
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\ref\KMB.Library.Units.dll
 D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Units.pdb
+D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\KMB.Library.Units.csproj.AssemblyReference.cache
+D:\Develop\PhysicsUnits\Units\KMB.Library.Units\obj\Debug\net5.0\refint\KMB.Library.Units.dll

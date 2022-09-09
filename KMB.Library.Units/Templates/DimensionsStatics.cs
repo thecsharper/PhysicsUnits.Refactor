@@ -1,11 +1,4 @@
-﻿  
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KMB.Library.Units
+﻿namespace KMB.Library.Units
 {
 	// Generated from Dimensions.xml
     public partial class Dimensions

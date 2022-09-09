@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Keith Barrett 2021 -->
 <units name="Time" ns="TimeUnits">
   <!-- Seconds already included in Metric -->
   <unit name="Minutes" shortname="min" dimension="Time" factor="60.0" />

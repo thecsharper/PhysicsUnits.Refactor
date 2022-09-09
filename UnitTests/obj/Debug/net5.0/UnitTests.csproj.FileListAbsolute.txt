@@ -3,7 +3,6 @@ D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\UnitTests.deps.json
 D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\UnitTests.runtimeconfig.json
 D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\UnitTests.runtimeconfig.dev.json
 D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\UnitTests.dll
-D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\ref\UnitTests.dll
 D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\UnitTests.pdb
 D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\KMB.Library.Units.dll
 D:\Develop\PhysicsUnits\Units\UnitTests\bin\Debug\net5.0\KMB.Library.Units.pdb
@@ -17,3 +16,4 @@ D:\Develop\PhysicsUnits\Units\UnitTests\obj\Debug\net5.0\UnitTests.dll
 D:\Develop\PhysicsUnits\Units\UnitTests\obj\Debug\net5.0\ref\UnitTests.dll
 D:\Develop\PhysicsUnits\Units\UnitTests\obj\Debug\net5.0\UnitTests.pdb
 D:\Develop\PhysicsUnits\Units\UnitTests\obj\Debug\net5.0\UnitTests.genruntimeconfig.cache
+D:\Develop\PhysicsUnits\Units\UnitTests\obj\Debug\net5.0\refint\UnitTests.dll

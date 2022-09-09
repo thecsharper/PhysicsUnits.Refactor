@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KMB.Library.Units
+﻿namespace KMB.Library.Units
 {
     public static class Powers
     {
@@ -54,7 +48,6 @@ namespace KMB.Library.Units
                     return $"^{p}";
             }
         }
-
 
         public static bool TryParse(string s, out short power)
         {
@@ -126,6 +119,5 @@ namespace KMB.Library.Units
             }
             return bOK;
         }
-
     }
 }

@@ -1,9 +1,5 @@
-﻿// Keith Barrett 2021
-// Keith Barrett 2021
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
 using System.Runtime.CompilerServices;
 
 namespace KMB.Library.Units

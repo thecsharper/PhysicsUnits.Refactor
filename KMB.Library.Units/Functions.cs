@@ -1,7 +1,4 @@
-﻿// Keith Barrett 2021
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace KMB.Library.Units
 {
@@ -18,7 +15,6 @@ namespace KMB.Library.Units
             double v = timeSquared.Value;
             return new Time(Math.Sqrt(v));
         }
-
         
         public static AngularVelocity Sqrt(AngularVelocitySquared angluarVelocitySquared)
         {

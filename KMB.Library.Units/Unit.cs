@@ -1,11 +1,4 @@
-﻿// Keith Barrett 2021
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KMB.Library.Units
+﻿namespace KMB.Library.Units
 {
     public class Unit
     {
@@ -13,12 +6,14 @@ namespace KMB.Library.Units
         public string ShortName;
         public Dimensions Dimensions;
         public double ConversionFactor; //to convert from ISO units
+
         public enum DisplayOption
         {
             Standard,   // this is the default unit for the standard
             Multi,      // can be used as best fit or in multiple format
             Explicit    // can be used explicitly in a format
         };
+
         public DisplayOption displayOption;
 
         public bool Default { get { return displayOption == DisplayOption.Standard; } }
@@ -40,7 +35,7 @@ namespace KMB.Library.Units
         internal string FormatValue(double SIValue)
         {
             // The value will be in SI Units
-            return string.Format("{0:G9} {1}", ConvertValueFromSI(SIValue), ShortName);
+            return $"{ConvertValueFromSI(SIValue):G9} {ShortName}";
         }
 
         internal double ConvertValueFromSI(IPhysicalQuantity pq)

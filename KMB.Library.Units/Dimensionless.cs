@@ -1,11 +1,4 @@
-﻿// Keith Barrett 2021
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KMB.Library.Units
+﻿namespace KMB.Library.Units
 {
     public partial struct Dimensionless : IPhysicalQuantity
     {

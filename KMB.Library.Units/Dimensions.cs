@@ -1,18 +1,9 @@
-﻿// Keith Barrett 2021
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace KMB.Library.Units
 {
-    /// <summary>
-    /// Class to represent a physical dimension or combination of them.
-    /// </summary>
     public partial class Dimensions
     {
-        // There is a read-only value for the power of each dimension:
         public readonly short M; // Mass
         public readonly short L; // Length
         public readonly short T; // Time
@@ -44,10 +35,10 @@ namespace KMB.Library.Units
 
         public static bool operator ==(Dimensions d1, Dimensions d2)
         {
-            if (Object.ReferenceEquals(d1, d2))
+            if (ReferenceEquals(d1, d2))
                 return true;
-            bool d1null = Object.ReferenceEquals(d1, null);
-            bool d2null = Object.ReferenceEquals(d2, null);
+            bool d1null = ReferenceEquals(d1, null);
+            bool d2null = ReferenceEquals(d2, null);
             if (!d1null && !d2null)
                 return (d1.M == d2.M && d1.L == d2.L && d1.T == d2.T && d1.I == d2.I && d1.Θ == d2.Θ && d1.N == d2.N && d1.J == d2.J && d1.A == d2.A);
             else if (d1null && d2null)
@@ -58,8 +49,8 @@ namespace KMB.Library.Units
 
         public static bool operator !=(Dimensions d1, Dimensions d2)
         {
-            bool d1null = Object.ReferenceEquals(d1, null);
-            bool d2null = Object.ReferenceEquals(d2, null);
+            bool d1null = ReferenceEquals(d1, null);
+            bool d2null = ReferenceEquals(d2, null);
             if (!d1null && !d2null)
                 return (d1.M != d2.M || d1.L != d2.L || d1.T != d2.T || d1.I != d2.I || d1.Θ != d2.Θ || d1.N != d2.N || d1.J != d2.J || d1.A != d2.A);
             else if (d1null && d2null)
@@ -87,21 +78,21 @@ namespace KMB.Library.Units
         {
             string text = "";
             if (M != 0)
-                text += string.Format("M{0} ", Powers.ToString(M));
+                text += $"M{Powers.ToString(M)} ";
             if (L != 0)
-                text += string.Format("L{0} ", Powers.ToString(L));
+                text += $"L{Powers.ToString(L)} ";
             if (T != 0)
-                text += string.Format("T{0} ", Powers.ToString(T));
+                text += $"T{Powers.ToString(T)} ";
             if (I != 0)
-                text += string.Format("I{0} ", Powers.ToString(I));
+                text += $"I{Powers.ToString(I)} ";
             if (Θ != 0)
-                text += string.Format("Θ{0} ", Powers.ToString(Θ));
+                text += $"Θ{Powers.ToString(Θ)} ";
             if (N != 0)
-                text += string.Format("N{0} ", Powers.ToString(N));
+                text += $"N{Powers.ToString(N)} ";
             if (J != 0)
-                text += string.Format("J{0} ", Powers.ToString(J));
+                text += $"J{Powers.ToString(J)} ";
             if (A != 0)
-                text += string.Format("A{0} ", Powers.ToString(A));
+                text += $"A{Powers.ToString(A)} ";
             return text;
         }
 

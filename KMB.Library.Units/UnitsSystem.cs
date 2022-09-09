@@ -1,10 +1,7 @@
-﻿// Keith Barrett 2021
-using KMB.Library.Units.Metric;
+﻿using KMB.Library.Units.Metric;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KMB.Library.Units
 {
@@ -17,12 +14,11 @@ namespace KMB.Library.Units
             Standard
         };
 
-        // we should really have a stack of systems
-        //        public static MetricUnits Metric = new MetricUnits();
-        public static MetricUnits Metric = MetricUnits.System;
-        public static UnitsSystem Current = Metric;
+        // TODO we should really have a stack of systems
+        private static readonly MetricUnits Metric = MetricUnits.System;
+        private static readonly UnitsSystem Current = Metric;
 
-        internal static string ToString(Dimensionless d, FormatOption formatOption)
+        internal static string ToString(Dimensionless d)
         {
             return $"{d.Value}";
         }
@@ -35,14 +31,14 @@ namespace KMB.Library.Units
         internal static string ToString(IPhysicalQuantity qty, UnitsSystem system, FormatOption formatOption)
         {
             string s =  system.DoToString(qty, formatOption);
-            if(string.IsNullOrEmpty(s) && !Object.ReferenceEquals(system, Metric))
+            if(string.IsNullOrEmpty(s) && !ReferenceEquals(system, Metric))
                 s = Metric.DoToString(qty, formatOption);
             return s;
         }
 
         internal static string ToString(IPhysicalQuantity qty, params Unit[] units)
         {
-            if (units.Count() > 0)
+            if (units.Length > 0)
                 return Current.DoToString(qty, units);
             else
                 return Current.DoToString(qty, FormatOption.BestFit);
@@ -158,7 +154,6 @@ namespace KMB.Library.Units
             return result;
         }
 
-
         private Unit FindDefaultUnitFor(Dimensions dimensions)
         {
             Unit[] units = GetDefaultUnits();
@@ -228,7 +223,6 @@ namespace KMB.Library.Units
             return Current.DoParseUnits(s);
         }
 
-
         public static PhysicalQuantity Parse(string s)
         {
             return Current.DoParse(s);
@@ -251,7 +245,7 @@ namespace KMB.Library.Units
                 qty = system.DoParse(s);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 qty = new PhysicalQuantity(0.0, null);
                 return false;
@@ -263,9 +257,9 @@ namespace KMB.Library.Units
         public PhysicalQuantity DoParse(string str)
         {
             // parse a string in the form [number unit]*
-            PhysicalQuantity qty = new PhysicalQuantity();
+            PhysicalQuantity qty = new();
             string[] parts = str.Split(' ');
-            ParseState state = ParseState.needNumber;
+            var state = ParseState.needNumber;
             double value = 0.0;
             foreach (string part in parts)
             {
@@ -300,15 +294,15 @@ namespace KMB.Library.Units
             Unit unit = FindUnit(part);
             if(unit != null)
             {
-                PhysicalQuantity unitQty  = new PhysicalQuantity(unit.ConversionFactor, unit.Dimensions);
+                PhysicalQuantity unitQty  = new(unit.ConversionFactor, unit.Dimensions);
                 return unitQty;
             }
 
             // try splitting by dots:
             string[] parts = part.Split('.', '*', '⋅');
-            if (parts.Count() > 1)
+            if (parts.Length > 1)
             {
-                PhysicalQuantity product = new PhysicalQuantity(1.0, Dimensions.Dimensionless);
+                PhysicalQuantity product = new(1.0, Dimensions.Dimensionless);
                 foreach (var subpart in parts)
                 {
                     PhysicalQuantity subQty = DoParseUnits(subpart);
@@ -318,7 +312,7 @@ namespace KMB.Library.Units
             }
 
             parts = part.Split('/');
-            if (parts.Count() > 1)
+            if (parts.Length > 1)
             {
                 PhysicalQuantity numerator = DoParseUnits(parts[0]);
                 PhysicalQuantity denominator = DoParseUnits(parts[1]);
@@ -364,6 +358,5 @@ namespace KMB.Library.Units
             }
             return list;
         }
-
     }
 }

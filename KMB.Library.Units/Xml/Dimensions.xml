@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Keith Barrett 2021 -->
 <dimensions>
   <dimension name="Dimensionless"     equals="new Dimensions(0, 0, 0)" />
   <dimension name="Mass"              equals="new Dimensions(1, 0, 0)" />
@@ -59,5 +58,4 @@
   <dimension name="Resistivity"       equals="Resistance * Length" >
     <And equals="ResistanceTimesArea / Length" />
   </dimension>
-
 </dimensions>
