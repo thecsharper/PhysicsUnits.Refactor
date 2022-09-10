@@ -3,7 +3,7 @@
 using KMB.Library.Units;
 using KMB.Library.Units.Metric;
 
-namespace UnitTests
+namespace UnitTests.Heat
 {
     [Trait("Category", "Calorimetry")]
     public class CalorimetryTests : TestBase
@@ -21,9 +21,9 @@ namespace UnitTests
             // Therefore the power on the 200 volt supply is:
             ElectricPotential v2 = 200.Volts();
             Power p2 = v2.Squared() / r;
-            
+
             TestString("p2", 512.0, "512 W", p2);
-            
+
             // So assuming the boiling point of water is 100 C
             TemperatureChange deltaT = 100.Celsius() - 20.Celsius();
             ThermalCapacity tcKettle = 100.CaloriesPerDegreeKelvin();
@@ -33,7 +33,7 @@ namespace UnitTests
             ThermalCapacity tcTotal = tcKettle + tcWater;
             Energy e = tcTotal * deltaT;    // e = 368208 J
             Time t = e / p2;  // t=722 secs
-            
+
             TestString("t", 719.15625, "719.15625 s", t);
         }
     }
