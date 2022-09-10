@@ -30,6 +30,7 @@ namespace UnitTests
             //throw new NotImplementedException();
         }
 
+        //Converted
         private static void TestAbsoluteTemperature()
         {
             Console.WriteLine("TestTemperature ------------------------");
@@ -70,6 +71,7 @@ namespace UnitTests
             TestToString("t4", 309.814444444, "309.81 K", t4);
         }
 
+        //Converted
         private static void TestTemperatureChange()
         {
             TemperatureChange deltaT = 100.Celsius() - 20.Celsius();
@@ -85,7 +87,7 @@ namespace UnitTests
         private static void TestHeat()
         {
             TestAbsoluteTemperature(); // Converted
-            TestTemperatureChange();
+            TestTemperatureChange();  // Converted
             TestCalorimetry();
             TestThermalExpansion();
             TestGases();
