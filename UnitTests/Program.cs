@@ -173,7 +173,9 @@ namespace UnitTests
         {
             TestDimensions(); // Converted
 
-            TestUnits();
+            TestDimensionless(); // Converted
+
+            TestUnits(); // Converted
 
             TestPhysicalQuantity();
 
@@ -182,8 +184,6 @@ namespace UnitTests
             TestParsing();
 
             TestDouble();
-
-            TestDimensionless();
 
             TestAngles();
 
