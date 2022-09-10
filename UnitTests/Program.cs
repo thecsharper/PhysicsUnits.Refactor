@@ -10,20 +10,20 @@ namespace UnitTests
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            TestBasics();
+        //public static void Main(string[] args)
+        //{
+        //    TestBasics();
 
-            TestBritishUnits();
+        //    TestBritishUnits();
 
-            TestDynamics();
+        //    TestDynamics();
 
-            TestHeat();
+        //    TestHeat();
 
-            TestLight();
+        //    TestLight();
 
-            TestElectricityAndMagnetism();
-        }
+        //    TestElectricityAndMagnetism();
+        //}
 
         private static void TestLight()
         {
@@ -84,7 +84,7 @@ namespace UnitTests
 
         private static void TestHeat()
         {
-            TestAbsoluteTemperature();
+            TestAbsoluteTemperature(); // Converted
             TestTemperatureChange();
             TestCalorimetry();
             TestThermalExpansion();

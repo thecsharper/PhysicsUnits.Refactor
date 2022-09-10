@@ -8,7 +8,7 @@ using FluentAssertions;
 namespace UnitTests
 {
     [Trait("Category", "AbsoluteTemperature")]
-    public class AbsoluteTemperatureTests
+    public class AbsoluteTemperatureTests : TestBase
     {
         [Fact]
         public void Absolute_Temperature_Tests()
@@ -45,12 +45,6 @@ namespace UnitTests
             // New style, may not throw if conversion fails in the future
             Action act = () => TestString("t4", 309.814444444, "309.81 K", AbsoluteTemperature.Parse("98 °F"));
             act.Should().NotThrow<Exception>();
-        }
-
-        private static void TestString(string varName, double expectedValue, string expectedString, IPhysicalQuantity l1)
-        {
-            Check.Equal(expectedValue, l1.Value, $"wrong value for {varName}: {l1.Value}");
-            Check.Equal(expectedString, l1.ToString(), "wrong value for {varName}.ToString()");
         }
     }
 }
