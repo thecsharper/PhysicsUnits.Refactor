@@ -177,9 +177,9 @@ namespace UnitTests
 
             TestUnits(); // Converted
 
-            TestPhysicalQuantity();
+            TestPhysicalQuantity(); // Converted
 
-            TestToString();
+            TestToString(); // Converted
 
             TestParsing();
 
