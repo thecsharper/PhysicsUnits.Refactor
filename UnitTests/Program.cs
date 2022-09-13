@@ -183,7 +183,7 @@ namespace UnitTests
 
             TestParsing(); // Converted
 
-            TestDouble();
+            TestDouble(); // Converted
 
             TestAngles();
 
