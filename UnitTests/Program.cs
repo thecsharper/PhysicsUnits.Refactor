@@ -185,7 +185,7 @@ namespace UnitTests
 
             TestDouble(); // Converted
 
-            TestAngles();
+            TestAngles(); // Converted
 
             TestLength();
 
