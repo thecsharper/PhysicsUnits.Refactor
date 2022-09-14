@@ -190,7 +190,7 @@ namespace UnitTests
             TestLength();
 
             // conversions to higher dimensions
-            TestArea();
+            TestArea(); // Converted
 
             TestVolume();
 
