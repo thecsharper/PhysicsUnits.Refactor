@@ -196,7 +196,7 @@ namespace UnitTests
 
             TestDensity(); // Converted
 
-            TestTime();
+            TestTime(); // Converted
 
             TestPrefixes();
 
