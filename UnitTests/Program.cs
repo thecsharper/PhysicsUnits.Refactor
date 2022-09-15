@@ -192,9 +192,9 @@ namespace UnitTests
             // conversions to higher dimensions
             TestArea(); // Converted
 
-            TestVolume();
+            TestVolume(); // Converted
 
-            TestDensity();
+            TestDensity(); // Converted
 
             TestTime();
 
