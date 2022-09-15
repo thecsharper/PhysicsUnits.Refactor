@@ -84,6 +84,7 @@ namespace UnitTests
             TestToString("t2", 306.15, "306.15 K", t2);
         }
 
+        //Converted
         private static void TestHeat()
         {
             TestAbsoluteTemperature(); // Converted
@@ -93,16 +94,19 @@ namespace UnitTests
             TestGases();
         }
 
+        //Converted
         private static void TestGases()
         {
             //throw new NotImplementedException();
         }
-
+        
+        //Converted
         private static void TestThermalExpansion()
         {
             //throw new NotImplementedException();
         }
 
+        //Converted
         private static void TestCalorimetry()
         {
             Console.WriteLine("TestCalorimetry ------------------------");
@@ -129,12 +133,14 @@ namespace UnitTests
             TestToString("t", 719.15625, "719.15625 s", t);
         }
 
+        //Converted
         private static void TestElectricityAndMagnetism()
         {
             TestResistance();
             TestResistivity();
         }
 
+        //Converted
         private static void TestResistance()
         {
             // A 1 ohm resistor has a voltage drop from 100V to 10V across it.
@@ -154,6 +160,7 @@ namespace UnitTests
             TestToString("v", 20, "20 volt", v);
         }
 
+        //Converted
         private static void TestResistivity()
         {
             // A Nichrome heating element must generate 450 Watts of heat from a 250 Volt Supply.
@@ -169,6 +176,7 @@ namespace UnitTests
             TestToString("l", 6.31313131, "6.31313131 m", l);
         }
 
+        //Converted
         private static void TestBasics()
         {
             TestDimensions(); // Converted
@@ -198,10 +206,11 @@ namespace UnitTests
 
             TestTime(); // Converted
 
-            TestPrefixes();
+            TestPrefixes(); //Converted
 
         }
 
+        //Converted
         private static void TestDimensions()
         {
             Console.WriteLine("TestDimensions ------------------------");
@@ -211,6 +220,7 @@ namespace UnitTests
             Console.WriteLine($"r={r}");
         }
 
+        //Converted
         private static void TestPhysicalQuantity()
         {
             Console.WriteLine("TestPhysicalQuantity ------------------------");
@@ -225,6 +235,7 @@ namespace UnitTests
             Check.Equal("171.08 kg⋅m", product.ToString(), "wrong value for product.ToString()");
         }
 
+        //Converted
         private static void TestToString()
         {
             Console.WriteLine("TestToString ------------------------");
@@ -315,6 +326,7 @@ namespace UnitTests
             Console.WriteLine($"l={l}");
         }
 
+        //Converted
         private static void TestParsing()
         {
             Console.WriteLine("TestParsing ------------------------");
