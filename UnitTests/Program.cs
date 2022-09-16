@@ -573,6 +573,7 @@ namespace UnitTests
             Check.Equal("34926029 min 13.0000001 s", s, "wrong value for l1.ToString()");
         }
 
+        //Converted
         private static void TestBritishUnits()
         {
             Console.WriteLine("TestBritishUnits ------------------------");
