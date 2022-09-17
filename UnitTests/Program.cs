@@ -642,6 +642,7 @@ namespace UnitTests
             Check.Equal("37.5782881 km", s, "wrong value for l.ToString()");
         }
 
+        //Converted
         private static void TestAcceleration()
         {
             Console.WriteLine("TestAcceleration ------------------------");
