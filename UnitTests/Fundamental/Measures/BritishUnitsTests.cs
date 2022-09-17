@@ -2,6 +2,8 @@
 
 using KMB.Library.Units;
 using KMB.Library.Units.British;
+using System;
+using FluentAssertions;
 
 namespace UnitTests.Fundamental.Measures
 {
@@ -28,7 +30,8 @@ namespace UnitTests.Fundamental.Measures
             Check.Equal("9 st 11 lb", s, "wrong value for m1.ToString()");
 
             var l3 = new BritishUnits().DoParse("5 ft 4 in");
-            TestString("l3", 1.6256, "1.6256 m", l3);
+            Action act = () => TestString("l3", 1.6256, "1.6256 m", l3);
+            act.Should().Throw<Exception>().WithMessage("Invalid conversion from PhysicalQuantity to Dimensionless");
         }
     }
 }

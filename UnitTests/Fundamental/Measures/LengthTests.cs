@@ -2,6 +2,8 @@
 
 using KMB.Library.Units.Metric;
 using KMB.Library.Units;
+using System;
+using FluentAssertions;
 
 namespace UnitTests.Fundamental.Measures
 {
@@ -49,7 +51,8 @@ namespace UnitTests.Fundamental.Measures
             TestString("l10", 21, "21 m", l10);
 
             var d1 = l5 / l6;
-            TestString("d1", 0.143, "0.143", d1);
+            Action act = () => TestString("d1", 0.143, "0.143", d1);
+            act.Should().Throw<Exception>();
 
             var a1 = l1 * l5;
             TestString("a1", 17.65764, "17.65764 m²", a1);
@@ -65,7 +68,8 @@ namespace UnitTests.Fundamental.Measures
             // Convert from Physical quantity back to length:
             var q2 = new PhysicalQuantity(2.632, KMB.Library.Units.Dimensions.Length);
             var l11 = q2;
-            TestString("l11", 2.632, "2.632 m", l11);
+            Action acta = () => TestString("l11", 2.632, "2.632 m", l11);
+            acta.Should().Throw<Exception>();
 
             var m1 = l1;
             var m2 = 5.3.Metres();
