@@ -95,6 +95,5 @@ namespace KMB.Library.Units
                 text += $"A{Powers.ToString(A)} ";
             return text;
         }
-
    }
 }

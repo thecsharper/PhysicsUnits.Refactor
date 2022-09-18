@@ -6,7 +6,7 @@ namespace KMB.Library.Units
 {
     public partial class Dimensions
     {
-        public static readonly Dimensions AbsoluteTemperature = new Dimensions(0, 0, 0, 0, 1);
+        public static readonly Dimensions AbsoluteTemperature = new(0, 0, 0, 0, 1);
     }
 
     public readonly partial struct AbsoluteTemperature : IPhysicalQuantity
@@ -17,13 +17,13 @@ namespace KMB.Library.Units
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         public AbsoluteTemperature(double v)
         {
-            this.Value = v;
+            Value = v;
         }
 
         #region String conversion methods
         public override string ToString()
         {
-            string result = string.Format("{0:0.##} K", Value);
+            var result = string.Format("{0:0.##} K", Value);
             return result;
         }
 
@@ -31,15 +31,15 @@ namespace KMB.Library.Units
         {
             Check.True(object.ReferenceEquals(unit.Dimensions, Dimensions.AbsoluteTemperature), "Dimensions must match");
             double v = unit.ConvertValueFromSI(Value);
-            string shortName = unit.ShortName;
-             string result = string.Format("{0:0.##} {1}", v, shortName);
+            var shortName = unit.ShortName;
+            var result = string.Format("{0:0.##} {1}", v, shortName);
             return result;
         }
 
         public static AbsoluteTemperature Parse(string s)
         {
             string[] parts = s.Split(' ');
-            if(parts.Count() != 2)
+            if (parts.Count() != 2)
                 throw new Exception($"Parsing error: invalid format: {s} ");
             string number = parts[0];
             double value = 0.0;
@@ -47,7 +47,7 @@ namespace KMB.Library.Units
                 throw new Exception($"Parsing error: Not a number: {number} ");
             string unitString = parts[1];
             Unit unit = TemperatureUnits.System.FindUnit(unitString);
-            if(unit == null)
+            if (unit == null)
                 throw new Exception($"Parsing error: invalid units: {unitString} ");
             value = unit.ConvertValueToSI(value);
             AbsoluteTemperature t = new AbsoluteTemperature(value);
@@ -178,7 +178,7 @@ namespace KMB.Library.Units
     {
         public static UnitWithOffset Kelvin = new UnitWithOffset("Kelvin", "K", Dimensions.AbsoluteTemperature, 1.0, 0.0, Unit.DisplayOption.Explicit);
         public static UnitWithOffset Celsius = new UnitWithOffset("Celsius", "°C", Dimensions.AbsoluteTemperature, 1.0, 273.15, Unit.DisplayOption.Explicit);
-        public static UnitWithOffset Fahrenheit = new UnitWithOffset("Fahrenheit", "°F", Dimensions.AbsoluteTemperature, 5.0/9.0, 255.37, Unit.DisplayOption.Explicit);
+        public static UnitWithOffset Fahrenheit = new UnitWithOffset("Fahrenheit", "°F", Dimensions.AbsoluteTemperature, 5.0 / 9.0, 255.37, Unit.DisplayOption.Explicit);
 
         private static readonly Unit[] allTemperatureUnits = new Unit[]
         {
@@ -231,7 +231,5 @@ namespace KMB.Library.Units
             double kelvin = (v - 32.0) * 5.0 / 9.0 + 273.15;
             return new AbsoluteTemperature(kelvin);
         }
-
-
     }
 }

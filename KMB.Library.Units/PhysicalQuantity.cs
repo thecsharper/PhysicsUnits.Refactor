@@ -24,8 +24,6 @@ namespace KMB.Library.Units
             return UnitsSystem.ToString(this);
         }
 
-        #region Comparison Operators
-
         public static int Compare(PhysicalQuantity v1, IPhysicalQuantity v2)
         {
             if (v1.Dimensions != v2.Dimensions)
@@ -86,10 +84,6 @@ namespace KMB.Library.Units
             return Compare(v1, v2) < 0;
         }
 
-        #endregion
-
-        #region Maths Operators
-
         public static PhysicalQuantity operator +(PhysicalQuantity v1, IPhysicalQuantity v2)
         {
             if (v1.Dimensions != null && v1.Dimensions != v2.Dimensions)
@@ -133,7 +127,5 @@ namespace KMB.Library.Units
         {
             return new PhysicalQuantity(Math.Pow(v.Value, p), v.Dimensions ^ p);
         }
-
-        #endregion
     }
 }

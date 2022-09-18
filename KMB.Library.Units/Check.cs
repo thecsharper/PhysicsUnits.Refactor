@@ -35,8 +35,8 @@ namespace KMB.Library.Units
                 Equal(ex.Message, expectedException, $"Code threw incorrect exception: {ex.Message}");
                 return;
             }
+
             throw new Exception($"Code did not throw exception: {expectedException}");
         }
-
     }
 }
