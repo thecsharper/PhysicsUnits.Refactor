@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMB.Library.Units.Tests", "UnitTests\KMB.Library.Units.Tests.csproj", "{8B733F19-ADD0-4B17-9193-6ECB07E9BA6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMB.Library.Units.Tests", "KMB.Library.Units.Tests\KMB.Library.Units.Tests.csproj", "{8B733F19-ADD0-4B17-9193-6ECB07E9BA6E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMB.Library.Units", "KMB.Library.Units\KMB.Library.Units.csproj", "{A2935EAF-359E-486F-A778-A82E70BC656D}"
 EndProject

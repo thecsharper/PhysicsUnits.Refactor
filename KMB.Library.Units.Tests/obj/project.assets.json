@@ -6353,11 +6353,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\KMB.Library.Units.Tests.csproj",
+      "projectUniqueName": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\KMB.Library.Units.Tests.csproj",
       "projectName": "KMB.Library.Units.Tests",
-      "projectPath": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\KMB.Library.Units.Tests.csproj",
+      "projectPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\KMB.Library.Units.Tests.csproj",
       "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-      "outputPath": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\obj\\",
+      "outputPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

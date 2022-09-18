@@ -1,78 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\KMB.Library.Units.Tests.csproj": {}
+    "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\KMB.Library.Units.Tests.csproj": {}
   },
   "projects": {
-    "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\KMB.Library.Units.csproj": {
+    "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\KMB.Library.Units.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\KMB.Library.Units.csproj",
-        "projectName": "KMB.Library.Units",
-        "projectPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\KMB.Library.Units.csproj",
-        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\ServiceFabricSDK.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\KMB.Library.Units.Tests.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\KMB.Library.Units.Tests.csproj",
+        "projectUniqueName": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\KMB.Library.Units.Tests.csproj",
         "projectName": "KMB.Library.Units.Tests",
-        "projectPath": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\KMB.Library.Units.Tests.csproj",
+        "projectPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\KMB.Library.Units.Tests.csproj",
         "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\obj\\",
+        "outputPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -134,6 +73,67 @@
               "version": "[2.4.5, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\KMB.Library.Units.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\KMB.Library.Units.csproj",
+        "projectName": "KMB.Library.Units",
+        "projectPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\KMB.Library.Units.csproj",
+        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+        "outputPath": "D:\\Develop\\PhysicsUnits\\Units\\KMB.Library.Units\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\ServiceFabricSDK.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "imports": [
             "net461",
             "net462",
