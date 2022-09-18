@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UO4Y57qtkL+UAXIIXxHnMycZC9ai8q4u0AqbgKCRKZ0gcfqc/3UlxTfxXJh+VxqPiQEQFYDMshLLo8KUz6Jb0g==",
+  "dgSpecHash": "916dEA0q72fHBXgHmuHtYBlgrzvBQ1/OGepkhjLrp701HhTJ8mN8nDv6zoU6b16em4IA+tUhUqZ8WmE2Kl3Hkw==",
   "success": true,
-  "projectFilePath": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\UnitTests.csproj",
+  "projectFilePath": "D:\\Develop\\PhysicsUnits\\Units\\UnitTests\\KMB.Library.Units.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\simon\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\simon\\.nuget\\packages\\fluentassertions\\6.7.0\\fluentassertions.6.7.0.nupkg.sha512",

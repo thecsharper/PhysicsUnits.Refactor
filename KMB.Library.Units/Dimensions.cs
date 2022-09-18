@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KMB.Library.Units
+﻿namespace KMB.Library.Units
 {
     public partial class Dimensions
     {
@@ -36,27 +34,43 @@ namespace KMB.Library.Units
         public static bool operator ==(Dimensions d1, Dimensions d2)
         {
             if (ReferenceEquals(d1, d2))
+            {
                 return true;
-            bool d1null = ReferenceEquals(d1, null);
-            bool d2null = ReferenceEquals(d2, null);
-            if (!d1null && !d2null)
+            }
+                
+            var d1null = ReferenceEquals(d1, null);
+            var d2null = ReferenceEquals(d2, null);
+            if (!d1null && !d2null) 
+            {
                 return (d1.M == d2.M && d1.L == d2.L && d1.T == d2.T && d1.I == d2.I && d1.Θ == d2.Θ && d1.N == d2.N && d1.J == d2.J && d1.A == d2.A);
+            }
+                
             else if (d1null && d2null)
-                return true;
-            else
-                return false;
+            { 
+                return true; 
+            }
+            else 
+            { 
+                return false; 
+            }
         }
 
         public static bool operator !=(Dimensions d1, Dimensions d2)
         {
-            bool d1null = ReferenceEquals(d1, null);
-            bool d2null = ReferenceEquals(d2, null);
+            var d1null = d1 is null;
+            var d2null = d2 is null;
             if (!d1null && !d2null)
+            {
                 return (d1.M != d2.M || d1.L != d2.L || d1.T != d2.T || d1.I != d2.I || d1.Θ != d2.Θ || d1.N != d2.N || d1.J != d2.J || d1.A != d2.A);
+            }
             else if (d1null && d2null)
+            {
                 return false;
+            }
             else
+            {
                 return true;
+            }
         }
 
         public static Dimensions operator *(Dimensions d1, Dimensions d2)

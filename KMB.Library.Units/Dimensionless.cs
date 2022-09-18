@@ -3,12 +3,12 @@
     public partial struct Dimensionless : IPhysicalQuantity
     {
 
-        static public implicit operator Dimensionless(int value)
+        public static implicit operator Dimensionless(int value)
         {
             return new Dimensionless(value);
         }
 
-        static public implicit operator Dimensionless(double value)
+        public static implicit operator Dimensionless(double value)
         {
             return new Dimensionless(value);
         }

@@ -8,8 +8,8 @@
   <constant name="litresToCubicMetres" value="0.001" />
 
   <!-- Mass -->
-  <unit name="LongTons"       shortname="ton" dimension="Mass" factor="poundsToKilogrammes*2240.0" display="Multi" />
-  <unit name="Pounds"         shortname="lb" dimension="Mass" factor="poundsToKilogrammes" display="Standard" />
+  <unit name="LongTons" shortname="ton" dimension="Mass" factor="poundsToKilogrammes*2240.0" display="Multi" />
+  <unit name="Pounds" shortname="lb" dimension="Mass" factor="poundsToKilogrammes" display="Standard" />
 
   <!-- Length -->
   <unit name="Inches" shortname="in" dimension="Length" factor="(feetToMetres/12.0)"/>

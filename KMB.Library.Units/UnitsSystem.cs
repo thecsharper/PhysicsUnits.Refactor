@@ -321,12 +321,11 @@ namespace KMB.Library.Units
 
             if( part.Length > 1)
             {
-                string unitPart = "";
-                string power = "";
-                short p = 0;
+                var unitPart = "";
+                var power = "";
                 if (part.Length > 2 && part[^2] == '⁻')
                 {
-                    unitPart = part.Substring(0, part.Length-2);
+                    unitPart = part.Substring(0, part.Length - 2);
                     power = part.Substring(part.Length - 2, 2);
                 }
                 else
@@ -334,7 +333,7 @@ namespace KMB.Library.Units
                     unitPart = part.Substring(0, part.Length - 1);
                     power = part.Substring(part.Length - 1, 1);
                 }
-                if( Powers.TryParse(power, out p))
+                if (Powers.TryParse(power, out short p))
                 {
                     PhysicalQuantity qty = DoParseUnits(unitPart);
                     return qty ^ p;
@@ -346,16 +345,19 @@ namespace KMB.Library.Units
 
         public List<Unit> UnitsFor(Dimensions dimensions)
         {
-            List<Unit> list = new List<Unit>();
+            var list = new List<Unit>();
             if (dimensions != null)
             {
-                Unit[] units = GetAllUnits();
+                var units = GetAllUnits();
                 foreach (Unit u in units)
                 {
                     if (u.Dimensions == dimensions)
+                    {
                         list.Add(u);
+                    }
                 }
             }
+
             return list;
         }
     }

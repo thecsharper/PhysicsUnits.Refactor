@@ -31,7 +31,10 @@
             factor = 0.0;
             unit = null;
             if (word.Length < 3)
+            {
                 return false;
+            }
+                
             for(int i = 0; i < lookup.Length; i++)
             {
                 string s = lookup[i].name;
@@ -42,6 +45,7 @@
                     return true; 
                 }
             }
+
             return false;
         }
     }

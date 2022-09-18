@@ -2,7 +2,7 @@
 {
     public interface IPhysicalQuantity
     {
-        double Value { get; }
-        Dimensions Dimensions { get; }
+        public double Value { get; }
+        public Dimensions Dimensions { get; }
     }
 }
