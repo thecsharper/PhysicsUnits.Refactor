@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>KMB.Library.Units</id>
+    <version>1.0.1-beta</version>
+    <authors>KMB.Library.Units</authors>
+    <readme>README.md</readme>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0" />
+    </dependencies>
+    <contentFiles>
+      <files include="any/net6.0/Templates/USAUnits.tt" buildAction="Content" />
+      <files include="any/net6.0/Templates/TimeUnits.tt" buildAction="Content" />
+      <files include="any/net6.0/Templates/BritishUnits.tt" buildAction="Content" />
+      <files include="any/net6.0/Xml/BritishUnits.xml" buildAction="Content" />
+      <files include="any/net6.0/Xml/Dimensions.xml" buildAction="Content" />
+      <files include="any/net6.0/Templates/DimensionsStatics.tt" buildAction="Content" />
+      <files include="any/net6.0/Templates/MetricUnits.tt" buildAction="Content" />
+      <files include="any/net6.0/Xml/MetricUnits.xml" buildAction="Content" />
+      <files include="any/net6.0/Templates/Quantities.tt" buildAction="Content" />
+      <files include="any/net6.0/Xml/TimeUnits.xml" buildAction="Content" />
+      <files include="any/net6.0/Xml/USAUnits.xml" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\bin\Debug\net6.0\KMB.Library.Units.dll" target="lib\net6.0\KMB.Library.Units.dll" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\USAUnits.tt" target="content\Templates\USAUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\USAUnits.tt" target="contentFiles\any\net6.0\Templates\USAUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\TimeUnits.tt" target="content\Templates\TimeUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\TimeUnits.tt" target="contentFiles\any\net6.0\Templates\TimeUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\BritishUnits.tt" target="content\Templates\BritishUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\BritishUnits.tt" target="contentFiles\any\net6.0\Templates\BritishUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\BritishUnits.xml" target="content\Xml\BritishUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\BritishUnits.xml" target="contentFiles\any\net6.0\Xml\BritishUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\Dimensions.xml" target="content\Xml\Dimensions.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\Dimensions.xml" target="contentFiles\any\net6.0\Xml\Dimensions.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\DimensionsStatics.tt" target="content\Templates\DimensionsStatics.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\DimensionsStatics.tt" target="contentFiles\any\net6.0\Templates\DimensionsStatics.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\MetricUnits.tt" target="content\Templates\MetricUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\MetricUnits.tt" target="contentFiles\any\net6.0\Templates\MetricUnits.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\MetricUnits.xml" target="content\Xml\MetricUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\MetricUnits.xml" target="contentFiles\any\net6.0\Xml\MetricUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\Quantities.tt" target="content\Templates\Quantities.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Templates\Quantities.tt" target="contentFiles\any\net6.0\Templates\Quantities.tt" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\TimeUnits.xml" target="content\Xml\TimeUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\TimeUnits.xml" target="contentFiles\any\net6.0\Xml\TimeUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\USAUnits.xml" target="content\Xml\USAUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\KMB.Library.Units\Xml\USAUnits.xml" target="contentFiles\any\net6.0\Xml\USAUnits.xml" />
+    <file src="D:\Develop\PhysicsUnits\Units\README.md" target="\README.md" />
+  </files>
+</package>

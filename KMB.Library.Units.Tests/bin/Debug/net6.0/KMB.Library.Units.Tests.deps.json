@@ -9,7 +9,7 @@
       "KMB.Library.Units.Tests/1.0.0": {
         "dependencies": {
           "FluentAssertions": "6.7.0",
-          "KMB.Library.Units": "1.0.0",
+          "KMB.Library.Units": "1.0.1-beta",
           "Microsoft.NET.Test.Sdk": "17.3.1",
           "Moq": "4.18.2",
           "xunit": "2.4.2",
@@ -1172,7 +1172,7 @@
         }
       },
       "xunit.runner.visualstudio/2.4.5": {},
-      "KMB.Library.Units/1.0.0": {
+      "KMB.Library.Units/1.0.1-beta": {
         "runtime": {
           "KMB.Library.Units.dll": {}
         }
@@ -1864,7 +1864,7 @@
       "path": "xunit.runner.visualstudio/2.4.5",
       "hashPath": "xunit.runner.visualstudio.2.4.5.nupkg.sha512"
     },
-    "KMB.Library.Units/1.0.0": {
+    "KMB.Library.Units/1.0.1-beta": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

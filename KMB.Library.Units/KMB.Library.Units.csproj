@@ -5,15 +5,13 @@
     <Configurations>Debug;Release;Debug Optimised</Configurations>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<!--<Version>$(PackageVersion)</Version>-->
+	<Version>1.0.1-beta</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Optimised|AnyCPU'">
     <Optimize>true</Optimize>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Angle.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="BritishUnits.tt" />
