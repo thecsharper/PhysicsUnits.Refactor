@@ -1908,7 +1908,7 @@
           "build/netcoreapp3.1/xunit.runner.visualstudio.props": {}
         }
       },
-      "KMB.Library.Units/1.0.0": {
+      "KMB.Library.Units/1.0.1": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
@@ -6329,7 +6329,7 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "KMB.Library.Units/1.0.0": {
+    "KMB.Library.Units/1.0.1": {
       "type": "project",
       "path": "../KMB.Library.Units/KMB.Library.Units.csproj",
       "msbuildProject": "../KMB.Library.Units/KMB.Library.Units.csproj"
@@ -6338,7 +6338,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "FluentAssertions >= 6.7.0",
-      "KMB.Library.Units >= 1.0.0",
+      "KMB.Library.Units >= 1.0.1",
       "Microsoft.NET.Test.Sdk >= 17.3.1",
       "Moq >= 4.18.2",
       "xunit >= 2.4.2",
