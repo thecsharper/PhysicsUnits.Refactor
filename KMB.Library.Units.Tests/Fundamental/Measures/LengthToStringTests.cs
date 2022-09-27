@@ -39,7 +39,7 @@ namespace UnitTests.Fundamental.Measures
             Length.Parse("5 ft 4 in", BritishUnits.System); // l = 1.6256 m
             
             Action act = () => Length.Parse("42 m 76 kg");
-            act.Should().Throw<Exception>();
+            act.Should().Throw<Exception>().WithMessage("Parsing error: Invalid dimension for units: kg ");
         }
     }
 }
